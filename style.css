@@ -51,11 +51,17 @@ a {
     gap: 0.75rem;
 }
 
-.navbar-logo img {
-    height: 48px;
-    width: 48px;
+.navbar-logo img,
+.navbar .custom-logo {
+    height: clamp(40px, 6vw, 60px);
+    width: clamp(40px, 6vw, 60px);
     object-fit: contain;
     display: block;
+}
+
+.navbar .custom-logo-link {
+    display: inline-flex;
+    align-items: center;
 }
 
 .navbar-title {
@@ -468,6 +474,16 @@ a {
 }
 
 @media (max-width: 991px) {
+    .navbar .navbar-brand {
+        gap: 0.5rem;
+        max-width: 70%;
+    }
+
+    .navbar-title {
+        font-size: 0.9rem;
+        line-height: 1.2;
+    }
+
     .navbar-nav {
         gap: 0;
         padding-top: 1rem;

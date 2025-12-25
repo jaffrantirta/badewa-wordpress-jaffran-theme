@@ -12,7 +12,7 @@
         <div class="container">
             <a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>">
                 <?php if (has_custom_logo()) : ?>
-                    <span class="navbar-logo"><?php the_custom_logo(); ?></span>
+                    <span class="navbar-logo"><?php echo get_custom_logo(); ?></span>
                 <?php endif; ?>
                 <span class="navbar-title"><?php bloginfo('name'); ?></span>
             </a>

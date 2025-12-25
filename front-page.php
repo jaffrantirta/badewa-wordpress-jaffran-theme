@@ -39,27 +39,27 @@ get_header();
     <section id="hero" class="hero-section">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6500">
             <div class="carousel-indicators">
-                <?php foreach ($hero_slides as $index => $slide) : ?>
+                <?php foreach ($hero_slides as $index => $slide): ?>
                     <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?php echo esc_attr($index); ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-label="<?php echo esc_attr(sprintf(__('Slide %d', 'smkkesehatan'), $index + 1)); ?>"></button>
                 <?php endforeach; ?>
             </div>
             <div class="carousel-inner">
-                <?php foreach ($hero_slides as $index => $slide) : ?>
+                <?php foreach ($hero_slides as $index => $slide): ?>
                     <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
                         <img src="<?php echo esc_url($slide['image']); ?>" class="d-block w-100 hero-image" alt="<?php echo esc_attr($slide['title']); ?>">
                         <div class="carousel-caption">
                             <div class="hero-card">
-                                <?php if (!empty($slide['kicker'])) : ?>
+                                <?php if (!empty($slide['kicker'])): ?>
                                     <p class="hero-kicker"><?php echo esc_html($slide['kicker']); ?></p>
                                 <?php endif; ?>
-                                <?php if (!empty($slide['title'])) : ?>
-                                    <?php if ($index === 0) : ?>
+                                <?php if (!empty($slide['title'])): ?>
+                                    <?php if ($index === 0): ?>
                                         <h1 class="hero-title"><?php echo esc_html($slide['title']); ?></h1>
-                                    <?php else : ?>
+                                    <?php else: ?>
                                         <h2 class="hero-title"><?php echo esc_html($slide['title']); ?></h2>
                                     <?php endif; ?>
                                 <?php endif; ?>
-                                <?php if (!empty($slide['text'])) : ?>
+                                <?php if (!empty($slide['text'])): ?>
                                     <p class="hero-text"><?php echo esc_html($slide['text']); ?></p>
                                 <?php endif; ?>
                             </div>
@@ -95,7 +95,7 @@ get_header();
                             <ul class="kompetensi-list">
                                 <?php
                                 $list_items = preg_split('/\r\n|\r|\n/', (string) get_theme_mod('smk_kompetensi_list_1', "Praktik laboratorium formulasi obat.\nSimulasi layanan apotek modern.\nMagang di klinik dan rumah sakit."));
-                                foreach ($list_items as $item) :
+                                foreach ($list_items as $item):
                                     $item = trim($item);
                                     if ($item === '') {
                                         continue;
@@ -116,7 +116,7 @@ get_header();
                             <ul class="kompetensi-list">
                                 <?php
                                 $list_items = preg_split('/\r\n|\r|\n/', (string) get_theme_mod('smk_kompetensi_list_2', "Simulasi tindakan keperawatan harian.\nPendampingan guru klinis berpengalaman.\nKegiatan praktik di fasilitas kesehatan."));
-                                foreach ($list_items as $item) :
+                                foreach ($list_items as $item):
                                     $item = trim($item);
                                     if ($item === '') {
                                         continue;
@@ -176,7 +176,7 @@ get_header();
         <div class="container">
             <div class="section-header">
                 <p class="section-kicker">Informasi Sekolah</p>
-                <h2>Latest Blog</h2>
+                <h2>Info Terbaru</h2>
                 <p>Ikuti berita, kegiatan, dan prestasi terbaru dari SMK Kesehatan Bali Dewata.</p>
             </div>
             <div class="row g-4">
@@ -185,17 +185,12 @@ get_header();
                     'posts_per_page' => 5,
                     'post_status' => 'publish',
                 ]);
-                if ($latest_posts->have_posts()) :
-                    while ($latest_posts->have_posts()) :
+                if ($latest_posts->have_posts()):
+                    while ($latest_posts->have_posts()):
                         $latest_posts->the_post();
                         ?>
                         <div class="col-md-6 col-lg-4">
                             <article class="card blog-card h-100">
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <?php the_post_thumbnail('medium_large', ['class' => 'card-img-top']); ?>
-                                <?php else : ?>
-                                    <div class="blog-thumb-placeholder"></div>
-                                <?php endif; ?>
                                 <div class="card-body">
                                     <p class="card-kicker"><?php echo esc_html(get_the_date()); ?></p>
                                     <h3 class="card-title">
@@ -211,7 +206,7 @@ get_header();
                         <?php
                     endwhile;
                     wp_reset_postdata();
-                else :
+                else:
                     ?>
                     <div class="col-12">
                         <div class="empty-state">

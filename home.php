@@ -24,11 +24,6 @@ $news_query = new WP_Query([
                         <?php while ($news_query->have_posts()) : $news_query->the_post(); ?>
                             <div class="col-md-6">
                                 <article class="card blog-card h-100">
-                                    <?php if (has_post_thumbnail()) : ?>
-                                        <?php the_post_thumbnail('medium_large', ['class' => 'card-img-top']); ?>
-                                    <?php else : ?>
-                                        <div class="blog-thumb-placeholder"></div>
-                                    <?php endif; ?>
                                     <div class="card-body">
                                         <p class="card-kicker"><?php echo esc_html(get_the_date()); ?></p>
                                         <h2 class="card-title">
