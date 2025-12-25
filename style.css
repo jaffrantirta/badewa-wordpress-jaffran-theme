@@ -413,6 +413,99 @@ a {
     border-color: var(--primary-blue);
 }
 
+.pagination,
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+ul.page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination {
+    justify-content: flex-start;
+}
+
+.page-numbers li {
+    list-style: none;
+}
+
+.nav-links .page-numbers,
+ul.page-numbers .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 0.85rem;
+    border-radius: 14px;
+    border: 1px solid rgba(12, 61, 145, 0.18);
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.92);
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(8, 41, 95, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-links .page-numbers.current,
+ul.page-numbers .page-numbers.current {
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 12px 24px rgba(12, 61, 145, 0.22);
+    position: relative;
+}
+
+.nav-links .page-numbers.current::after,
+ul.page-numbers .page-numbers.current::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.nav-links a.page-numbers:hover,
+.nav-links a.page-numbers:focus,
+ul.page-numbers a.page-numbers:hover,
+ul.page-numbers a.page-numbers:focus {
+    color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(8, 41, 95, 0.16);
+}
+
+.nav-links a.page-numbers:focus-visible,
+ul.page-numbers a.page-numbers:focus-visible {
+    outline: 2px solid rgba(30, 111, 217, 0.5);
+    outline-offset: 2px;
+}
+
+.nav-links .dots,
+ul.page-numbers .dots {
+    color: var(--muted);
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    min-width: auto;
+}
+
+.nav-links .prev,
+.nav-links .next,
+ul.page-numbers .prev,
+ul.page-numbers .next {
+    padding: 0 1.15rem;
+}
+
 .empty-state {
     background: #ffffff;
     padding: 2.5rem;

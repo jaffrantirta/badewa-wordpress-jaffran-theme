@@ -46,6 +46,7 @@ $news_query = new WP_Query([
                             'current' => $paged,
                             'prev_text' => __('Sebelumnya', 'smkkesehatan'),
                             'next_text' => __('Berikutnya', 'smkkesehatan'),
+                            'type' => 'list',
                         ]);
                         ?>
                     </div>
