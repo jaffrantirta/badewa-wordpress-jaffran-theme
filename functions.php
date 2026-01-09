@@ -56,6 +56,82 @@ add_action('wp_enqueue_scripts', 'smkkesehatan_assets');
 
 function smkkesehatan_customize_register($wp_customize)
 {
+    // Header Section
+    $wp_customize->add_section('smkkesehatan_header', [
+        'title' => __('Header Settings', 'smkkesehatan'),
+        'priority' => 29,
+    ]);
+
+    $wp_customize->add_setting('smk_header_phone', [
+        'default' => '+6282227535136',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_header_phone', [
+        'label' => __('Phone Number', 'smkkesehatan'),
+        'section' => 'smkkesehatan_header',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_header_email', [
+        'default' => 'info@merdeka-tc.id',
+        'sanitize_callback' => 'sanitize_email',
+    ]);
+    $wp_customize->add_control('smk_header_email', [
+        'label' => __('Email Address', 'smkkesehatan'),
+        'section' => 'smkkesehatan_header',
+        'type' => 'email',
+    ]);
+
+    $wp_customize->add_setting('smk_header_instagram', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_header_instagram', [
+        'label' => __('Instagram URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_header',
+        'type' => 'url',
+    ]);
+
+    $wp_customize->add_setting('smk_header_facebook', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_header_facebook', [
+        'label' => __('Facebook URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_header',
+        'type' => 'url',
+    ]);
+
+    $wp_customize->add_setting('smk_header_youtube', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_header_youtube', [
+        'label' => __('YouTube URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_header',
+        'type' => 'url',
+    ]);
+
+    $wp_customize->add_setting('smk_header_cta_text', [
+        'default' => 'Ayo Daftar !',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_header_cta_text', [
+        'label' => __('CTA Button Text', 'smkkesehatan'),
+        'section' => 'smkkesehatan_header',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_header_cta_url', [
+        'default' => '#',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_header_cta_url', [
+        'label' => __('CTA Button URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_header',
+        'type' => 'url',
+    ]);
+
     // Hero Section
     $wp_customize->add_section('smkkesehatan_hero', [
         'title' => __('Hero Section', 'smkkesehatan'),
