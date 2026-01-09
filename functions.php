@@ -56,56 +56,135 @@ add_action('wp_enqueue_scripts', 'smkkesehatan_assets');
 
 function smkkesehatan_customize_register($wp_customize)
 {
+    // Hero Section
     $wp_customize->add_section('smkkesehatan_hero', [
-        'title' => __('Hero Carousel', 'smkkesehatan'),
+        'title' => __('Hero Section', 'smkkesehatan'),
         'priority' => 30,
     ]);
 
-    for ($i = 1; $i <= 3; $i++) {
-        $wp_customize->add_setting("smk_hero_image_{$i}", [
-            'default' => '',
-            'sanitize_callback' => 'esc_url_raw',
-        ]);
-        $wp_customize->add_control(new WP_Customize_Image_Control(
-            $wp_customize,
-            "smk_hero_image_{$i}",
-            [
-                'label' => sprintf(__('Hero Image %d', 'smkkesehatan'), $i),
-                'section' => 'smkkesehatan_hero',
-            ]
-        ));
-
-        $wp_customize->add_setting("smk_hero_kicker_{$i}", [
-            'default' => '',
-            'sanitize_callback' => 'sanitize_text_field',
-        ]);
-        $wp_customize->add_control("smk_hero_kicker_{$i}", [
-            'label' => sprintf(__('Hero Kicker %d', 'smkkesehatan'), $i),
+    $wp_customize->add_setting('smk_hero_image', [
+        'default' => 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Image_Control(
+        $wp_customize,
+        'smk_hero_image',
+        [
+            'label' => __('Hero Image', 'smkkesehatan'),
             'section' => 'smkkesehatan_hero',
-            'type' => 'text',
-        ]);
+        ]
+    ));
 
-        $wp_customize->add_setting("smk_hero_title_{$i}", [
-            'default' => '',
-            'sanitize_callback' => 'sanitize_text_field',
-        ]);
-        $wp_customize->add_control("smk_hero_title_{$i}", [
-            'label' => sprintf(__('Hero Title %d', 'smkkesehatan'), $i),
-            'section' => 'smkkesehatan_hero',
-            'type' => 'text',
-        ]);
+    $wp_customize->add_setting('smk_hero_title', [
+        'default' => 'Mencetak Tenaga Kesehatan Profesional',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_hero_title', [
+        'label' => __('Hero Title', 'smkkesehatan'),
+        'section' => 'smkkesehatan_hero',
+        'type' => 'text',
+    ]);
 
-        $wp_customize->add_setting("smk_hero_text_{$i}", [
-            'default' => '',
-            'sanitize_callback' => 'sanitize_textarea_field',
-        ]);
-        $wp_customize->add_control("smk_hero_text_{$i}", [
-            'label' => sprintf(__('Hero Text %d', 'smkkesehatan'), $i),
-            'section' => 'smkkesehatan_hero',
-            'type' => 'textarea',
-        ]);
-    }
+    $wp_customize->add_setting('smk_hero_text', [
+        'default' => 'Kurikulum berbasis industri, guru berpengalaman, dan fasilitas praktik modern.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ]);
+    $wp_customize->add_control('smk_hero_text', [
+        'label' => __('Hero Text', 'smkkesehatan'),
+        'section' => 'smkkesehatan_hero',
+        'type' => 'textarea',
+    ]);
 
+    $wp_customize->add_setting('smk_hero_button_text', [
+        'default' => 'Daftar Sekarang',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_hero_button_text', [
+        'label' => __('Button Text', 'smkkesehatan'),
+        'section' => 'smkkesehatan_hero',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_hero_button_url', [
+        'default' => '#',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_hero_button_url', [
+        'label' => __('Button URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_hero',
+        'type' => 'url',
+    ]);
+
+    // Sambutan Section
+    $wp_customize->add_section('smkkesehatan_sambutan', [
+        'title' => __('Sambutan Kepala Sekolah', 'smkkesehatan'),
+        'priority' => 31,
+    ]);
+
+    $wp_customize->add_setting('smk_sambutan_kicker', [
+        'default' => 'Sambutan',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_sambutan_kicker', [
+        'label' => __('Kicker', 'smkkesehatan'),
+        'section' => 'smkkesehatan_sambutan',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_sambutan_title', [
+        'default' => 'Sambutan Kepala Sekolah',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_sambutan_title', [
+        'label' => __('Judul', 'smkkesehatan'),
+        'section' => 'smkkesehatan_sambutan',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_sambutan_text', [
+        'default' => 'Selamat datang di website SMK Kesehatan Bali Dewata. Kami berkomitmen untuk mencetak tenaga kesehatan profesional yang kompeten dan berakhlak mulia.<br><br>Dengan kurikulum berbasis industri, fasilitas modern, dan tenaga pengajar berpengalaman, kami siap membantu siswa meraih masa depan cerah di bidang kesehatan.',
+        'sanitize_callback' => 'wp_kses_post',
+    ]);
+    $wp_customize->add_control('smk_sambutan_text', [
+        'label' => __('Teks Sambutan (HTML allowed)', 'smkkesehatan'),
+        'section' => 'smkkesehatan_sambutan',
+        'type' => 'textarea',
+    ]);
+
+    $wp_customize->add_setting('smk_sambutan_name', [
+        'default' => 'Dr. Ahmad Hidayat, M.Pd',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_sambutan_name', [
+        'label' => __('Nama Kepala Sekolah', 'smkkesehatan'),
+        'section' => 'smkkesehatan_sambutan',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_sambutan_position', [
+        'default' => 'Kepala Sekolah SMK Kesehatan Bali Dewata',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_sambutan_position', [
+        'label' => __('Jabatan', 'smkkesehatan'),
+        'section' => 'smkkesehatan_sambutan',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_sambutan_image', [
+        'default' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Image_Control(
+        $wp_customize,
+        'smk_sambutan_image',
+        [
+            'label' => __('Foto Kepala Sekolah', 'smkkesehatan'),
+            'section' => 'smkkesehatan_sambutan',
+        ]
+    ));
+
+    // Kompetensi Section
     $wp_customize->add_section('smkkesehatan_kompetensi', [
         'title' => __('Kompetensi Keahlian', 'smkkesehatan'),
         'priority' => 32,
@@ -121,47 +200,45 @@ function smkkesehatan_customize_register($wp_customize)
         'type' => 'textarea',
     ]);
 
+    $default_kompetensi_titles = [
+        1 => 'Asisten Keperawatan',
+        2 => 'Farmasi Klinis',
+    ];
+    $default_kompetensi_texts = [
+        1 => 'Memberikan perawatan dasar pasien, membantu dokter dan perawat dalam prosedur medis, serta memastikan kenyamanan dan keselamatan pasien.',
+        2 => 'Mengelola dan menyiapkan obat-obatan, memberikan konseling kepada pasien tentang penggunaan obat yang tepat dan aman.',
+    ];
+
     for ($i = 1; $i <= 2; $i++) {
-        $wp_customize->add_setting("smk_kompetensi_kicker_{$i}", [
-            'default' => $i === 1 ? 'Farmasi' : 'Perawat',
-            'sanitize_callback' => 'sanitize_text_field',
+        $wp_customize->add_setting("smk_kompetensi_image_{$i}", [
+            'default' => '',
+            'sanitize_callback' => 'esc_url_raw',
         ]);
-        $wp_customize->add_control("smk_kompetensi_kicker_{$i}", [
-            'label' => sprintf(__('Kicker %d', 'smkkesehatan'), $i),
-            'section' => 'smkkesehatan_kompetensi',
-            'type' => 'text',
-        ]);
+        $wp_customize->add_control(new WP_Customize_Image_Control(
+            $wp_customize,
+            "smk_kompetensi_image_{$i}",
+            [
+                'label' => sprintf(__('Image Program %d', 'smkkesehatan'), $i),
+                'section' => 'smkkesehatan_kompetensi',
+            ]
+        ));
 
         $wp_customize->add_setting("smk_kompetensi_title_{$i}", [
-            'default' => $i === 1 ? 'Asisten Tenaga Kefarmasian' : 'Asisten Keperawatan',
+            'default' => $default_kompetensi_titles[$i],
             'sanitize_callback' => 'sanitize_text_field',
         ]);
         $wp_customize->add_control("smk_kompetensi_title_{$i}", [
-            'label' => sprintf(__('Judul %d', 'smkkesehatan'), $i),
+            'label' => sprintf(__('Judul Program %d', 'smkkesehatan'), $i),
             'section' => 'smkkesehatan_kompetensi',
             'type' => 'text',
         ]);
 
         $wp_customize->add_setting("smk_kompetensi_text_{$i}", [
-            'default' => $i === 1
-                ? 'Fokus pada peracikan obat, pelayanan farmasi, dan manajemen logistik obat.'
-                : 'Pembelajaran keterampilan klinis dasar, komunikasi pasien, dan etika profesi.',
+            'default' => $default_kompetensi_texts[$i],
             'sanitize_callback' => 'sanitize_textarea_field',
         ]);
         $wp_customize->add_control("smk_kompetensi_text_{$i}", [
-            'label' => sprintf(__('Deskripsi %d', 'smkkesehatan'), $i),
-            'section' => 'smkkesehatan_kompetensi',
-            'type' => 'textarea',
-        ]);
-
-        $wp_customize->add_setting("smk_kompetensi_list_{$i}", [
-            'default' => $i === 1
-                ? "Praktik laboratorium formulasi obat.\nSimulasi layanan apotek modern.\nMagang di klinik dan rumah sakit."
-                : "Simulasi tindakan keperawatan harian.\nPendampingan guru klinis berpengalaman.\nKegiatan praktik di fasilitas kesehatan.",
-            'sanitize_callback' => 'sanitize_textarea_field',
-        ]);
-        $wp_customize->add_control("smk_kompetensi_list_{$i}", [
-            'label' => sprintf(__('Poin (1 per baris) %d', 'smkkesehatan'), $i),
+            'label' => sprintf(__('Deskripsi Program %d', 'smkkesehatan'), $i),
             'section' => 'smkkesehatan_kompetensi',
             'type' => 'textarea',
         ]);

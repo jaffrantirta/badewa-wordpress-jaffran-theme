@@ -4,77 +4,61 @@ get_header();
 
 <main>
     <?php
-    $hero_defaults = [
-        [
-            'image' => 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80',
-            'kicker' => 'SMK Kesehatan Bali Dewata',
-            'title' => 'Mencetak Tenaga Kesehatan Profesional',
-            'text' => 'Kurikulum berbasis industri, guru berpengalaman, dan fasilitas praktik modern.',
-        ],
-        [
-            'image' => 'https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=1600&q=80',
-            'kicker' => 'Fasilitas Lengkap',
-            'title' => 'Laboratorium Farmasi & Keperawatan',
-            'text' => 'Simulasi klinis dan peralatan terbaru untuk pengalaman belajar nyata.',
-        ],
-        [
-            'image' => 'https://images.unsplash.com/photo-1504439468489-c8920d796a29?auto=format&fit=crop&w=1600&q=80',
-            'kicker' => 'Berbasis Karier',
-            'title' => 'Siap Kerja, Siap Kuliah',
-            'text' => 'Kemitraan dengan fasilitas kesehatan dan alumni yang sukses di berbagai institusi.',
-        ],
-    ];
-
-    $hero_slides = [];
-    for ($i = 1; $i <= 3; $i++) {
-        $hero_slides[] = [
-            'image' => get_theme_mod("smk_hero_image_{$i}", $hero_defaults[$i - 1]['image']),
-            'kicker' => get_theme_mod("smk_hero_kicker_{$i}", $hero_defaults[$i - 1]['kicker']),
-            'title' => get_theme_mod("smk_hero_title_{$i}", $hero_defaults[$i - 1]['title']),
-            'text' => get_theme_mod("smk_hero_text_{$i}", $hero_defaults[$i - 1]['text']),
-        ];
-    }
+    // Hero Section Data
+    $hero_image = get_theme_mod('smk_hero_image', 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80');
+    $hero_title = get_theme_mod('smk_hero_title', 'Mencetak Tenaga Kesehatan Profesional');
+    $hero_text = get_theme_mod('smk_hero_text', 'Kurikulum berbasis industri, guru berpengalaman, dan fasilitas praktik modern.');
+    $hero_button_text = get_theme_mod('smk_hero_button_text', 'Daftar Sekarang');
+    $hero_button_url = get_theme_mod('smk_hero_button_url', '#');
     ?>
 
     <section id="hero" class="hero-section">
-        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6500">
-            <div class="carousel-indicators">
-                <?php foreach ($hero_slides as $index => $slide): ?>
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?php echo esc_attr($index); ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-label="<?php echo esc_attr(sprintf(__('Slide %d', 'smkkesehatan'), $index + 1)); ?>"></button>
-                <?php endforeach; ?>
-            </div>
-            <div class="carousel-inner">
-                <?php foreach ($hero_slides as $index => $slide): ?>
-                    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                        <img src="<?php echo esc_url($slide['image']); ?>" class="d-block w-100 hero-image" alt="<?php echo esc_attr($slide['title']); ?>">
-                        <div class="carousel-caption">
-                            <div class="hero-card">
-                                <?php if (!empty($slide['kicker'])): ?>
-                                    <p class="hero-kicker"><?php echo esc_html($slide['kicker']); ?></p>
-                                <?php endif; ?>
-                                <?php if (!empty($slide['title'])): ?>
-                                    <?php if ($index === 0): ?>
-                                        <h1 class="hero-title"><?php echo esc_html($slide['title']); ?></h1>
-                                    <?php else: ?>
-                                        <h2 class="hero-title"><?php echo esc_html($slide['title']); ?></h2>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                                <?php if (!empty($slide['text'])): ?>
-                                    <p class="hero-text"><?php echo esc_html($slide['text']); ?></p>
-                                <?php endif; ?>
-                            </div>
-                        </div>
+        <div class="hero-container">
+            <img src="<?php echo esc_url($hero_image); ?>" class="hero-image" alt="<?php echo esc_attr($hero_title); ?>">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="container">
+                    <div class="hero-text-wrapper">
+                        <h1 class="hero-title"><?php echo esc_html($hero_title); ?></h1>
+                        <p class="hero-text"><?php echo esc_html($hero_text); ?></p>
+                        <a href="<?php echo esc_url($hero_button_url); ?>" class="btn btn-hero">
+                            <?php echo esc_html($hero_button_text); ?>
+                        </a>
                     </div>
-                <?php endforeach; ?>
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden"><?php esc_html_e('Previous', 'smkkesehatan'); ?></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden"><?php esc_html_e('Next', 'smkkesehatan'); ?></span>
-            </button>
+        </div>
+    </section>
+
+    <section id="sambutan" class="section-pad bg-light">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="sambutan-content">
+                        <p class="section-kicker"><?php echo esc_html(get_theme_mod('smk_sambutan_kicker', 'Sambutan')); ?></p>
+                        <h2 class="sambutan-title"><?php echo esc_html(get_theme_mod('smk_sambutan_title', 'Sambutan Kepala Sekolah')); ?></h2>
+                        <div class="sambutan-text">
+                            <?php echo wpautop(wp_kses_post(get_theme_mod('smk_sambutan_text', 'Selamat datang di website SMK Kesehatan Bali Dewata. Kami berkomitmen untuk mencetak tenaga kesehatan profesional yang kompeten dan berakhlak mulia.<br><br>Dengan kurikulum berbasis industri, fasilitas modern, dan tenaga pengajar berpengalaman, kami siap membantu siswa meraih masa depan cerah di bidang kesehatan.'))); ?>
+                        </div>
+                        <?php if (get_theme_mod('smk_sambutan_name', '')): ?>
+                            <div class="sambutan-signature">
+                                <strong><?php echo esc_html(get_theme_mod('smk_sambutan_name', 'Dr. Ahmad Hidayat, M.Pd')); ?></strong>
+                                <p class="text-muted"><?php echo esc_html(get_theme_mod('smk_sambutan_position', 'Kepala Sekolah SMK Kesehatan Bali Dewata')); ?></p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <?php
+                    $sambutan_image = get_theme_mod('smk_sambutan_image', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80');
+                    ?>
+                    <?php if ($sambutan_image): ?>
+                        <div class="sambutan-image">
+                            <img src="<?php echo esc_url($sambutan_image); ?>" alt="<?php echo esc_attr(get_theme_mod('smk_sambutan_name', 'Kepala Sekolah')); ?>" loading="lazy">
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -85,49 +69,70 @@ get_header();
                 <h2>Kompetensi Keahlian</h2>
                 <p><?php echo esc_html(get_theme_mod('smk_kompetensi_intro', 'Jalur pembelajaran spesifik dengan sertifikasi dan praktik industri untuk karier masa depan.')); ?></p>
             </div>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card kompetensi-card h-100">
-                        <div class="card-body">
-                            <p class="card-kicker"><?php echo esc_html(get_theme_mod('smk_kompetensi_kicker_1', 'Farmasi')); ?></p>
-                            <h3 class="card-title"><?php echo esc_html(get_theme_mod('smk_kompetensi_title_1', 'Asisten Tenaga Kefarmasian')); ?></h3>
-                            <p class="card-text"><?php echo esc_html(get_theme_mod('smk_kompetensi_text_1', 'Fokus pada peracikan obat, pelayanan farmasi, dan manajemen logistik obat.')); ?></p>
-                            <ul class="kompetensi-list">
-                                <?php
-                                $list_items = preg_split('/\r\n|\r|\n/', (string) get_theme_mod('smk_kompetensi_list_1', "Praktik laboratorium formulasi obat.\nSimulasi layanan apotek modern.\nMagang di klinik dan rumah sakit."));
-                                foreach ($list_items as $item):
-                                    $item = trim($item);
-                                    if ($item === '') {
-                                        continue;
-                                    }
-                                    ?>
-                                    <li><?php echo esc_html($item); ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    </div>
+            <?php
+            $default_images = [
+                1 => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
+                2 => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1200&q=80',
+            ];
+            $default_titles = [
+                1 => 'Asisten Keperawatan',
+                2 => 'Farmasi Klinis',
+            ];
+            $default_texts = [
+                1 => 'Memberikan perawatan dasar pasien, membantu dokter dan perawat dalam prosedur medis, serta memastikan kenyamanan dan keselamatan pasien.',
+                2 => 'Mengelola dan menyiapkan obat-obatan, memberikan konseling kepada pasien tentang penggunaan obat yang tepat dan aman.',
+            ];
+            $kompetensi_items = [];
+            for ($i = 1; $i <= 2; $i++) {
+                $kompetensi_items[] = [
+                    'image' => get_theme_mod("smk_kompetensi_image_{$i}", $default_images[$i]),
+                    'title' => get_theme_mod("smk_kompetensi_title_{$i}", $default_titles[$i]),
+                    'text' => get_theme_mod("smk_kompetensi_text_{$i}", $default_texts[$i]),
+                ];
+            }
+            ?>
+            <div id="programCarousel" class="carousel slide program-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-indicators">
+                    <?php foreach ($kompetensi_items as $index => $item): ?>
+                        <button type="button" data-bs-target="#programCarousel" data-bs-slide-to="<?php echo esc_attr($index); ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-label="<?php echo esc_attr(sprintf(__('Program %d', 'smkkesehatan'), $index + 1)); ?>"></button>
+                    <?php endforeach; ?>
                 </div>
-                <div class="col-md-6">
-                    <div class="card kompetensi-card h-100">
-                        <div class="card-body">
-                            <p class="card-kicker"><?php echo esc_html(get_theme_mod('smk_kompetensi_kicker_2', 'Perawat')); ?></p>
-                            <h3 class="card-title"><?php echo esc_html(get_theme_mod('smk_kompetensi_title_2', 'Asisten Keperawatan')); ?></h3>
-                            <p class="card-text"><?php echo esc_html(get_theme_mod('smk_kompetensi_text_2', 'Pembelajaran keterampilan klinis dasar, komunikasi pasien, dan etika profesi.')); ?></p>
-                            <ul class="kompetensi-list">
-                                <?php
-                                $list_items = preg_split('/\r\n|\r|\n/', (string) get_theme_mod('smk_kompetensi_list_2', "Simulasi tindakan keperawatan harian.\nPendampingan guru klinis berpengalaman.\nKegiatan praktik di fasilitas kesehatan."));
-                                foreach ($list_items as $item):
-                                    $item = trim($item);
-                                    if ($item === '') {
-                                        continue;
-                                    }
-                                    ?>
-                                    <li><?php echo esc_html($item); ?></li>
-                                <?php endforeach; ?>
-                            </ul>
+                <div class="carousel-inner">
+                    <?php foreach ($kompetensi_items as $index => $item): ?>
+                        <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                            <div class="program-slide-card">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col-lg-6">
+                                        <?php if (!empty($item['image'])): ?>
+                                            <div class="program-slide-image">
+                                                <img src="<?php echo esc_url($item['image']); ?>" alt="<?php echo esc_attr($item['title']); ?>" loading="lazy">
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="program-slide-content">
+                                            <div class="program-number"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></div>
+                                            <?php if (!empty($item['title'])): ?>
+                                                <h3 class="program-slide-title"><?php echo esc_html($item['title']); ?></h3>
+                                            <?php endif; ?>
+                                            <?php if (!empty($item['text'])): ?>
+                                                <p class="program-slide-text"><?php echo esc_html($item['text']); ?></p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#programCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><?php esc_html_e('Previous', 'smkkesehatan'); ?></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#programCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><?php esc_html_e('Next', 'smkkesehatan'); ?></span>
+                </button>
             </div>
         </div>
     </section>
