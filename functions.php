@@ -529,6 +529,67 @@ function smkkesehatan_customize_register($wp_customize)
         'section' => 'smkkesehatan_footer',
         'type' => 'textarea',
     ]);
+
+    // FAQ Page Section
+    $wp_customize->add_section('smkkesehatan_faq', [
+        'title' => __('FAQ Page', 'smkkesehatan'),
+        'description' => __('Customize FAQ page hero and questions', 'smkkesehatan'),
+        'priority' => 41,
+    ]);
+
+    // FAQ Hero Settings
+    $wp_customize->add_setting('smk_faq_hero_image', [
+        'default' => get_template_directory_uri() . '/assets/images/hero-default.jpg',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'smk_faq_hero_image', [
+        'label' => __('FAQ Hero Image', 'smkkesehatan'),
+        'section' => 'smkkesehatan_faq',
+        'settings' => 'smk_faq_hero_image',
+    ]));
+
+    $wp_customize->add_setting('smk_faq_hero_title', [
+        'default' => 'Frequently Asked Questions',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_faq_hero_title', [
+        'label' => __('FAQ Hero Title', 'smkkesehatan'),
+        'section' => 'smkkesehatan_faq',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_faq_hero_text', [
+        'default' => 'Temukan jawaban atas pertanyaan yang sering diajukan seputar SMK Kesehatan',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ]);
+    $wp_customize->add_control('smk_faq_hero_text', [
+        'label' => __('FAQ Hero Text', 'smkkesehatan'),
+        'section' => 'smkkesehatan_faq',
+        'type' => 'textarea',
+    ]);
+
+    // FAQ Items (10 items)
+    for ($i = 1; $i <= 10; $i++) {
+        $wp_customize->add_setting("smk_faq_question_{$i}", [
+            'default' => '',
+            'sanitize_callback' => 'sanitize_text_field',
+        ]);
+        $wp_customize->add_control("smk_faq_question_{$i}", [
+            'label' => sprintf(__('FAQ %d - Question', 'smkkesehatan'), $i),
+            'section' => 'smkkesehatan_faq',
+            'type' => 'text',
+        ]);
+
+        $wp_customize->add_setting("smk_faq_answer_{$i}", [
+            'default' => '',
+            'sanitize_callback' => 'wp_kses_post',
+        ]);
+        $wp_customize->add_control("smk_faq_answer_{$i}", [
+            'label' => sprintf(__('FAQ %d - Answer', 'smkkesehatan'), $i),
+            'section' => 'smkkesehatan_faq',
+            'type' => 'textarea',
+        ]);
+    }
 }
 
 add_action('customize_register', 'smkkesehatan_customize_register');
