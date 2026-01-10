@@ -119,6 +119,16 @@ function smkkesehatan_customize_register($wp_customize)
         'type' => 'url',
     ]);
 
+    $wp_customize->add_setting('smk_header_tiktok', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_header_tiktok', [
+        'label' => __('TikTok URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_header',
+        'type' => 'url',
+    ]);
+
     $wp_customize->add_setting('smk_header_cta_text', [
         'default' => 'Ayo Daftar !',
         'sanitize_callback' => 'sanitize_text_field',
