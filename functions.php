@@ -50,6 +50,13 @@ function smkkesehatan_assets()
         '5.3.3',
         true
     );
+    wp_enqueue_script(
+        'smkkesehatan-menu',
+        get_template_directory_uri() . '/js/menu.js',
+        ['bootstrap-bundle'],
+        '1.0.0',
+        true
+    );
 }
 
 add_action('wp_enqueue_scripts', 'smkkesehatan_assets');

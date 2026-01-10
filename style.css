@@ -1018,9 +1018,42 @@ ul.page-numbers .next {
     .navbar-nav .sub-menu {
         box-shadow: none;
         position: static;
-        display: block;
+        display: none !important;
         background: transparent;
-        padding: 0;
+        padding: 0 0 0 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .navbar-nav .menu-item-has-children.dropdown-open > .sub-menu,
+    .navbar-nav .menu-item-has-children.dropdown-open > .dropdown-menu {
+        display: block !important;
+    }
+
+    .navbar-nav .menu-item-has-children > a {
+        position: relative;
+        padding-right: 2rem;
+    }
+
+    .navbar-nav .menu-item-has-children > a::after {
+        content: "+";
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1;
+        transition: transform 0.3s ease;
+    }
+
+    .navbar-nav .menu-item-has-children.dropdown-open > a::after {
+        content: "−";
+    }
+
+    .navbar-nav .sub-menu a,
+    .navbar-nav .dropdown-menu a {
+        padding-left: 1.5rem;
+        font-size: 0.9rem;
     }
 
     .btn-cta {
