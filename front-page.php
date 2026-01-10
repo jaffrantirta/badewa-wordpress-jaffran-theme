@@ -207,6 +207,15 @@ get_header();
                         ?>
                         <div class="col-md-6 col-lg-4">
                             <article class="card blog-card h-100">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <a href="<?php the_permalink(); ?>" class="blog-card-image-link">
+                                        <?php the_post_thumbnail('medium', ['class' => 'card-img-top blog-card-image']); ?>
+                                    </a>
+                                <?php else : ?>
+                                    <a href="<?php the_permalink(); ?>" class="blog-card-image-link">
+                                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" class="card-img-top blog-card-image" alt="<?php the_title_attribute(); ?>">
+                                    </a>
+                                <?php endif; ?>
                                 <div class="card-body">
                                     <p class="card-kicker"><?php echo esc_html(get_the_date()); ?></p>
                                     <h3 class="card-title">
