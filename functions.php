@@ -530,11 +530,122 @@ function smkkesehatan_customize_register($wp_customize)
         'type' => 'textarea',
     ]);
 
+    // About Us Page Section
+    $wp_customize->add_section('smkkesehatan_about', [
+        'title' => __('About Us Page', 'smkkesehatan'),
+        'description' => __('Customize About Us page content', 'smkkesehatan'),
+        'priority' => 41,
+    ]);
+
+    // About Hero Settings
+    $wp_customize->add_setting('smk_about_hero_image', [
+        'default' => get_template_directory_uri() . '/assets/images/hero-default.jpg',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'smk_about_hero_image', [
+        'label' => __('About Hero Image', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'settings' => 'smk_about_hero_image',
+    ]));
+
+    $wp_customize->add_setting('smk_about_hero_title', [
+        'default' => 'Tentang Kami',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_about_hero_title', [
+        'label' => __('About Hero Title', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_about_hero_text', [
+        'default' => 'Mengenal lebih dekat SMK Kesehatan Bali Dewata',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ]);
+    $wp_customize->add_control('smk_about_hero_text', [
+        'label' => __('About Hero Text', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'type' => 'textarea',
+    ]);
+
+    // About Content Settings
+    $wp_customize->add_setting('smk_about_title', [
+        'default' => 'Sejarah dan Profil Sekolah',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_about_title', [
+        'label' => __('About Title', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_about_text', [
+        'default' => 'SMK Kesehatan Bali Dewata didirikan dengan visi untuk mencetak tenaga kesehatan profesional yang kompeten dan berakhlak mulia. Dengan pengalaman lebih dari 10 tahun dalam pendidikan vokasi kesehatan, kami telah menghasilkan ribuan lulusan yang tersebar di berbagai fasilitas kesehatan di seluruh Indonesia.<br><br>Kami berkomitmen untuk memberikan pendidikan berkualitas tinggi melalui kurikulum yang disesuaikan dengan kebutuhan industri, didukung oleh tenaga pengajar berpengalaman dan fasilitas praktik yang modern. Setiap siswa dibimbing untuk tidak hanya menguasai kompetensi teknis, tetapi juga mengembangkan karakter profesional dan etika kerja yang kuat.',
+        'sanitize_callback' => 'wp_kses_post',
+    ]);
+    $wp_customize->add_control('smk_about_text', [
+        'label' => __('About Text (HTML allowed)', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'type' => 'textarea',
+    ]);
+
+    $wp_customize->add_setting('smk_about_image', [
+        'default' => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'smk_about_image', [
+        'label' => __('About Image', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'settings' => 'smk_about_image',
+    ]));
+
+    // Vision Settings
+    $wp_customize->add_setting('smk_vision_title', [
+        'default' => 'Visi',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_vision_title', [
+        'label' => __('Vision Title', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_vision_text', [
+        'default' => 'Menjadi lembaga pendidikan vokasi kesehatan terkemuka yang menghasilkan tenaga kesehatan profesional, kompeten, dan berakhlak mulia untuk memajukan dunia kesehatan Indonesia.',
+        'sanitize_callback' => 'wp_kses_post',
+    ]);
+    $wp_customize->add_control('smk_vision_text', [
+        'label' => __('Vision Text (HTML allowed)', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'type' => 'textarea',
+    ]);
+
+    // Mission Settings
+    $wp_customize->add_setting('smk_mission_title', [
+        'default' => 'Misi',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_mission_title', [
+        'label' => __('Mission Title', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_mission_items', [
+        'default' => "Menyelenggarakan pendidikan vokasi kesehatan berkualitas tinggi dengan kurikulum berbasis industri\nMengembangkan kompetensi siswa melalui pembelajaran teori dan praktik yang seimbang\nMembentuk karakter profesional dan etika kerja yang kuat pada setiap siswa\nMenjalin kerja sama dengan institusi kesehatan untuk program magang dan penempatan kerja\nMeningkatkan kualitas tenaga pengajar dan fasilitas pembelajaran secara berkelanjutan",
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ]);
+    $wp_customize->add_control('smk_mission_items', [
+        'label' => __('Mission Items (one per line)', 'smkkesehatan'),
+        'section' => 'smkkesehatan_about',
+        'type' => 'textarea',
+    ]);
+
     // FAQ Page Section
     $wp_customize->add_section('smkkesehatan_faq', [
         'title' => __('FAQ Page', 'smkkesehatan'),
         'description' => __('Customize FAQ page hero and questions', 'smkkesehatan'),
-        'priority' => 41,
+        'priority' => 42,
     ]);
 
     // FAQ Hero Settings
