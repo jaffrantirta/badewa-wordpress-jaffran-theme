@@ -9,23 +9,24 @@ get_header();
                 <header class="section-header">
                     <p class="section-kicker">Kategori</p>
                     <h1><?php single_cat_title(); ?></h1>
-                    <?php if (category_description()) : ?>
+                    <?php if (category_description()): ?>
                         <p><?php echo esc_html(wp_strip_all_tags(category_description())); ?></p>
                     <?php endif; ?>
                 </header>
 
-                <?php if (have_posts()) : ?>
+                <?php if (have_posts()): ?>
                     <div class="row g-4">
-                        <?php while (have_posts()) : the_post(); ?>
+                        <?php while (have_posts()):
+                            the_post(); ?>
                             <div class="col-md-6">
                                 <article class="card blog-card h-100">
-                                    <?php if (has_post_thumbnail()) : ?>
+                                    <?php if (has_post_thumbnail()): ?>
                                         <a href="<?php the_permalink(); ?>" class="blog-card-image-link">
                                             <?php the_post_thumbnail('medium', ['class' => 'card-img-top blog-card-image']); ?>
                                         </a>
-                                    <?php else : ?>
+                                    <?php else: ?>
                                         <a href="<?php the_permalink(); ?>" class="blog-card-image-link">
-                                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" class="card-img-top blog-card-image" alt="<?php the_title_attribute(); ?>">
+                                            <img src="http://www.staging.smkkesehatanbalidewata.sch.id/wp-content/uploads/2026/01/4-1.webp" class="card-img-top blog-card-image" alt="<?php the_title_attribute(); ?>">
                                         </a>
                                     <?php endif; ?>
                                     <div class="card-body">
@@ -52,7 +53,7 @@ get_header();
                         ]);
                         ?>
                     </div>
-                <?php else : ?>
+                <?php else: ?>
                     <div class="empty-state">
                         <h2>Belum ada artikel</h2>
                         <p>Konten kategori ini akan segera diperbarui.</p>
