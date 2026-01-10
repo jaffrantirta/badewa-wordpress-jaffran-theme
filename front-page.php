@@ -144,35 +144,34 @@ get_header();
                 <h2>Keunggulan SMK Kesehatan Bali Dewata</h2>
                 <p><?php echo esc_html(get_theme_mod('smk_keunggulan_intro', 'Lingkungan belajar yang formal, profesional, dan adaptif dengan kebutuhan dunia kesehatan.')); ?></p>
             </div>
+            <?php
+            $default_keunggulan_images = [
+                1 => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
+                2 => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+                3 => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+                4 => 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
+            ];
+            ?>
             <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card h-100">
-                        <span class="feature-number">01</span>
-                        <h3><?php echo esc_html(get_theme_mod('smk_keunggulan_title_1', 'Kurikulum Industri')); ?></h3>
-                        <p><?php echo esc_html(get_theme_mod('smk_keunggulan_text_1', 'Materi dirancang bersama mitra kesehatan untuk membekali kompetensi nyata.')); ?></p>
+                <?php for ($i = 1; $i <= 4; $i++): ?>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="feature-card h-100">
+                            <?php
+                            $keunggulan_image = get_theme_mod("smk_keunggulan_image_{$i}", $default_keunggulan_images[$i]);
+                            ?>
+                            <?php if ($keunggulan_image): ?>
+                                <div class="feature-image">
+                                    <img src="<?php echo esc_url($keunggulan_image); ?>" alt="<?php echo esc_attr(get_theme_mod("smk_keunggulan_title_{$i}", '')); ?>" loading="lazy">
+                                </div>
+                            <?php endif; ?>
+                            <div class="feature-content">
+                                <span class="feature-number"><?php echo esc_html(sprintf('%02d', $i)); ?></span>
+                                <h3><?php echo esc_html(get_theme_mod("smk_keunggulan_title_{$i}", '')); ?></h3>
+                                <p><?php echo esc_html(get_theme_mod("smk_keunggulan_text_{$i}", '')); ?></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card h-100">
-                        <span class="feature-number">02</span>
-                        <h3><?php echo esc_html(get_theme_mod('smk_keunggulan_title_2', 'Fasilitas Modern')); ?></h3>
-                        <p><?php echo esc_html(get_theme_mod('smk_keunggulan_text_2', 'Laboratorium praktik dan ruang simulasi yang mendukung pembelajaran aktif.')); ?></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card h-100">
-                        <span class="feature-number">03</span>
-                        <h3><?php echo esc_html(get_theme_mod('smk_keunggulan_title_3', 'Pengajar Profesional')); ?></h3>
-                        <p><?php echo esc_html(get_theme_mod('smk_keunggulan_text_3', 'Tenaga pendidik berpengalaman di bidang kesehatan dan pendidikan vokasi.')); ?></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card h-100">
-                        <span class="feature-number">04</span>
-                        <h3><?php echo esc_html(get_theme_mod('smk_keunggulan_title_4', 'Jalur Karier')); ?></h3>
-                        <p><?php echo esc_html(get_theme_mod('smk_keunggulan_text_4', 'Program pendampingan alumni dan kerja sama industri untuk penempatan kerja.')); ?></p>
-                    </div>
-                </div>
+                <?php endfor; ?>
             </div>
         </div>
     </section>

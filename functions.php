@@ -335,22 +335,35 @@ function smkkesehatan_customize_register($wp_customize)
         'type' => 'textarea',
     ]);
 
+    $default_keunggulan_titles = [
+        1 => 'Kurikulum Industri',
+        2 => 'Fasilitas Modern',
+        3 => 'Pengajar Profesional',
+        4 => 'Jalur Karier',
+    ];
+    $default_keunggulan_texts = [
+        1 => 'Materi dirancang bersama mitra kesehatan untuk membekali kompetensi nyata.',
+        2 => 'Laboratorium praktik dan ruang simulasi yang mendukung pembelajaran aktif.',
+        3 => 'Tenaga pendidik berpengalaman di bidang kesehatan dan pendidikan vokasi.',
+        4 => 'Program pendampingan alumni dan kerja sama industri untuk penempatan kerja.',
+    ];
+
     for ($i = 1; $i <= 4; $i++) {
-        $default_titles = [
-            1 => 'Kurikulum Industri',
-            2 => 'Fasilitas Modern',
-            3 => 'Pengajar Profesional',
-            4 => 'Jalur Karier',
-        ];
-        $default_texts = [
-            1 => 'Materi dirancang bersama mitra kesehatan untuk membekali kompetensi nyata.',
-            2 => 'Laboratorium praktik dan ruang simulasi yang mendukung pembelajaran aktif.',
-            3 => 'Tenaga pendidik berpengalaman di bidang kesehatan dan pendidikan vokasi.',
-            4 => 'Program pendampingan alumni dan kerja sama industri untuk penempatan kerja.',
-        ];
+        $wp_customize->add_setting("smk_keunggulan_image_{$i}", [
+            'default' => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ]);
+        $wp_customize->add_control(new WP_Customize_Image_Control(
+            $wp_customize,
+            "smk_keunggulan_image_{$i}",
+            [
+                'label' => sprintf(__('Image Keunggulan %d', 'smkkesehatan'), $i),
+                'section' => 'smkkesehatan_keunggulan',
+            ]
+        ));
 
         $wp_customize->add_setting("smk_keunggulan_title_{$i}", [
-            'default' => $default_titles[$i],
+            'default' => $default_keunggulan_titles[$i],
             'sanitize_callback' => 'sanitize_text_field',
         ]);
         $wp_customize->add_control("smk_keunggulan_title_{$i}", [
@@ -360,7 +373,7 @@ function smkkesehatan_customize_register($wp_customize)
         ]);
 
         $wp_customize->add_setting("smk_keunggulan_text_{$i}", [
-            'default' => $default_texts[$i],
+            'default' => $default_keunggulan_texts[$i],
             'sanitize_callback' => 'sanitize_textarea_field',
         ]);
         $wp_customize->add_control("smk_keunggulan_text_{$i}", [
