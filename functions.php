@@ -758,11 +758,132 @@ function smkkesehatan_customize_register($wp_customize)
         ]);
     }
 
+    // Contact Us Page Section
+    $wp_customize->add_section('smkkesehatan_contact', [
+        'title' => __('Contact Us Page', 'smkkesehatan'),
+        'description' => __('Customize Contact Us page content', 'smkkesehatan'),
+        'priority' => 43,
+    ]);
+
+    // Contact Hero Settings
+    $wp_customize->add_setting('smk_contact_hero_image', [
+        'default' => get_template_directory_uri() . '/assets/images/hero-default.jpg',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'smk_contact_hero_image', [
+        'label' => __('Contact Hero Image', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'settings' => 'smk_contact_hero_image',
+    ]));
+
+    $wp_customize->add_setting('smk_contact_hero_title', [
+        'default' => 'Hubungi Kami',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_contact_hero_title', [
+        'label' => __('Contact Hero Title', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_contact_hero_text', [
+        'default' => 'Kami siap membantu menjawab pertanyaan Anda',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ]);
+    $wp_customize->add_control('smk_contact_hero_text', [
+        'label' => __('Contact Hero Text', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'textarea',
+    ]);
+
+    // Contact Information Settings
+    $wp_customize->add_setting('smk_contact_address', [
+        'default' => 'Jl. Ahmad Yani Utara No. 331 Peguyangan, Denpasar Utara, Denpasar - Bali 80115',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ]);
+    $wp_customize->add_control('smk_contact_address', [
+        'label' => __('Address', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'textarea',
+    ]);
+
+    $wp_customize->add_setting('smk_contact_phone', [
+        'default' => '+6282227535136',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_contact_phone', [
+        'label' => __('Phone Number', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_contact_email', [
+        'default' => 'info@smkkesehatan.sch.id',
+        'sanitize_callback' => 'sanitize_email',
+    ]);
+    $wp_customize->add_control('smk_contact_email', [
+        'label' => __('Email Address', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'email',
+    ]);
+
+    $wp_customize->add_setting('smk_contact_map_url', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_contact_map_url', [
+        'label' => __('Google Maps Embed URL', 'smkkesehatan'),
+        'description' => __('Paste the embed URL from Google Maps', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'url',
+    ]);
+
+    // Contact Social Media Settings
+    $wp_customize->add_setting('smk_contact_instagram', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_contact_instagram', [
+        'label' => __('Instagram URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'url',
+    ]);
+
+    $wp_customize->add_setting('smk_contact_facebook', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_contact_facebook', [
+        'label' => __('Facebook URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'url',
+    ]);
+
+    $wp_customize->add_setting('smk_contact_youtube', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_contact_youtube', [
+        'label' => __('YouTube URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'url',
+    ]);
+
+    $wp_customize->add_setting('smk_contact_tiktok', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('smk_contact_tiktok', [
+        'label' => __('TikTok URL', 'smkkesehatan'),
+        'section' => 'smkkesehatan_contact',
+        'type' => 'url',
+    ]);
+
     // FAQ Page Section
     $wp_customize->add_section('smkkesehatan_faq', [
         'title' => __('FAQ Page', 'smkkesehatan'),
         'description' => __('Customize FAQ page hero and questions', 'smkkesehatan'),
-        'priority' => 43,
+        'priority' => 44,
     ]);
 
     // FAQ Hero Settings
