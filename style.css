@@ -355,6 +355,14 @@ a {
 
 .sambutan-content {
     padding-right: 2rem;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.sambutan-content.animate-in {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .sambutan-title {
@@ -392,7 +400,15 @@ a {
     position: relative;
     border-radius: 1.5rem;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(8, 41, 95, 0.15);
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition-delay: 0.2s;
+}
+
+.sambutan-image.animate-in {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .sambutan-image::before {
@@ -417,6 +433,14 @@ a {
 /* Program Carousel */
 .program-carousel {
     margin-top: 2rem;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.program-carousel.animate-in {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .program-slide-card {
@@ -599,6 +623,14 @@ a {
 .section-header {
     max-width: 680px;
     margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section-header.animate-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-header h2 {
@@ -626,6 +658,37 @@ a {
     border-radius: 1.25rem;
     box-shadow: 0 18px 40px rgba(10, 30, 70, 0.08);
     background: #ffffff;
+}
+
+.blog-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.blog-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.blog-card:nth-child(1).animate-in {
+    transition-delay: 0.1s;
+}
+
+.blog-card:nth-child(2).animate-in {
+    transition-delay: 0.2s;
+}
+
+.blog-card:nth-child(3).animate-in {
+    transition-delay: 0.3s;
+}
+
+.blog-card:nth-child(4).animate-in {
+    transition-delay: 0.4s;
+}
+
+.blog-card:nth-child(5).animate-in {
+    transition-delay: 0.5s;
 }
 
 .kompetensi-card .card-body {
@@ -668,8 +731,30 @@ a {
 .feature-card {
     background: #ffffff;
     border-radius: 1.25rem;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.feature-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feature-card:nth-child(1).animate-in {
+    transition-delay: 0.1s;
+}
+
+.feature-card:nth-child(2).animate-in {
+    transition-delay: 0.2s;
+}
+
+.feature-card:nth-child(3).animate-in {
+    transition-delay: 0.3s;
+}
+
+.feature-card:nth-child(4).animate-in {
+    transition-delay: 0.4s;
 }
 
 .feature-card:hover {
@@ -1428,11 +1513,26 @@ ul.page-numbers .next {
     background: #ffffff;
     border: none;
     border-radius: 12px;
-    margin-bottom: 1.25rem;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(12, 61, 145, 0.08);
-    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
+
+.faq-item.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.faq-item:nth-child(1).animate-in { transition-delay: 0.05s; }
+.faq-item:nth-child(2).animate-in { transition-delay: 0.10s; }
+.faq-item:nth-child(3).animate-in { transition-delay: 0.15s; }
+.faq-item:nth-child(4).animate-in { transition-delay: 0.20s; }
+.faq-item:nth-child(5).animate-in { transition-delay: 0.25s; }
+.faq-item:nth-child(6).animate-in { transition-delay: 0.30s; }
+.faq-item:nth-child(7).animate-in { transition-delay: 0.35s; }
+.faq-item:nth-child(8).animate-in { transition-delay: 0.40s; }
+.faq-item:nth-child(9).animate-in { transition-delay: 0.45s; }
+.faq-item:nth-child(10).animate-in { transition-delay: 0.50s; }
 
 .faq-item:hover {
     box-shadow: 0 4px 20px rgba(12, 61, 145, 0.15);
@@ -1643,6 +1743,7 @@ ul.page-numbers .next {
     color: #ffffff;
     font-size: 2.75rem;
     font-weight: 700;
+    animation: fadeInUp 0.8s ease-out;
     margin-bottom: 1rem;
     line-height: 1.2;
 }
@@ -1653,6 +1754,7 @@ ul.page-numbers .next {
     line-height: 1.6;
     margin: 0;
     opacity: 0.95;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 /* About Content Section */
@@ -1662,6 +1764,14 @@ ul.page-numbers .next {
 
 .about-content {
     padding-right: 2rem;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.about-content.animate-in {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .about-content-title {
@@ -1690,7 +1800,15 @@ ul.page-numbers .next {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(8, 41, 95, 0.12);
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition-delay: 0.2s;
+}
+
+.about-image.animate-in {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .about-image img {
@@ -1714,11 +1832,22 @@ ul.page-numbers .next {
     background: #ffffff;
     border-radius: 16px;
     padding: 3rem;
-    box-shadow: 0 4px 20px rgba(8, 41, 95, 0.08);
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.vm-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.vision-card.animate-in {
+    transition-delay: 0.1s;
+}
+
+.mission-card.animate-in {
+    transition-delay: 0.2s;
 }
 
 .vm-card:hover {
@@ -1958,6 +2087,7 @@ ul.page-numbers .next {
     color: #ffffff;
     font-size: 2.75rem;
     font-weight: 700;
+    animation: fadeInUp 0.8s ease-out;
     margin-bottom: 1rem;
     line-height: 1.2;
 }
@@ -1968,6 +2098,7 @@ ul.page-numbers .next {
     line-height: 1.6;
     margin: 0;
     opacity: 0.95;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 /* Fasilitas Content Section */
@@ -1978,6 +2109,49 @@ ul.page-numbers .next {
 .fasilitas-item {
     margin-bottom: 6rem;
     position: relative;
+    opacity: 0;
+}
+
+.fasilitas-item.animate-in .fasilitas-content {
+    animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.fasilitas-item.animate-in .fasilitas-image {
+    animation: fadeInRight 0.8s ease-out 0.2s forwards;
+}
+
+.fasilitas-item-reverse.animate-in .fasilitas-content {
+    animation: fadeInRight 0.8s ease-out forwards;
+}
+
+.fasilitas-item-reverse.animate-in .fasilitas-image {
+    animation: fadeInLeft 0.8s ease-out 0.2s forwards;
+}
+
+.fasilitas-item.animate-in {
+    opacity: 1;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .fasilitas-item:last-child {

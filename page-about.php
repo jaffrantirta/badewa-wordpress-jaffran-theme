@@ -109,5 +109,33 @@ $mission_items = get_theme_mod('smk_mission_items', "Menyelenggarakan pendidikan
     </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements
+    const aboutContent = document.querySelector('.about-content');
+    const aboutImage = document.querySelector('.about-image');
+    const vmCards = document.querySelectorAll('.vm-card');
+
+    if (aboutContent) observer.observe(aboutContent);
+    if (aboutImage) observer.observe(aboutImage);
+    vmCards.forEach(card => observer.observe(card));
+});
+</script>
+
 <?php
 get_footer();

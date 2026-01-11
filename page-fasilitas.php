@@ -80,5 +80,28 @@ for ($i = 1; $i <= 4; $i++) {
     </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements
+    const fasilitasItems = document.querySelectorAll('.fasilitas-item');
+    fasilitasItems.forEach(item => observer.observe(item));
+});
+</script>
+
 <?php
 get_footer();

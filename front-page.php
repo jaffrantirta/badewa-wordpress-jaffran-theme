@@ -246,5 +246,50 @@ get_header();
 
 </main>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+
+                // Animate children elements
+                if (entry.target.classList.contains('row')) {
+                    const children = entry.target.querySelectorAll('.col-md-6, .col-lg-3, .col-lg-4, .col-lg-6');
+                    children.forEach(child => {
+                        const card = child.querySelector('.feature-card, .blog-card');
+                        if (card) {
+                            card.classList.add('animate-in');
+                        }
+                    });
+                }
+
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements
+    const sambutanContent = document.querySelector('.sambutan-content');
+    const sambutanImage = document.querySelector('.sambutan-image');
+    const sectionHeaders = document.querySelectorAll('.section-header');
+    const programCarousel = document.querySelector('.program-carousel');
+    const featureRows = document.querySelectorAll('#keunggulan .row, #blog .row');
+
+    if (sambutanContent) observer.observe(sambutanContent);
+    if (sambutanImage) observer.observe(sambutanImage);
+    if (programCarousel) observer.observe(programCarousel);
+
+    sectionHeaders.forEach(header => observer.observe(header));
+    featureRows.forEach(row => observer.observe(row));
+});
+</script>
+
 <?php
 get_footer();
