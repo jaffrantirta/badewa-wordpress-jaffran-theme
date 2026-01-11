@@ -2122,48 +2122,32 @@ ul.page-numbers .next {
     position: relative;
 }
 
-.fasilitas-content,
+.fasilitas-content {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 .fasilitas-image {
     opacity: 0;
-    will-change: transform, opacity;
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s,
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s;
 }
 
-.fasilitas-item.animate-in .fasilitas-content {
-    animation: fadeInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.fasilitas-item-reverse .fasilitas-content {
+    transform: translateX(40px);
 }
 
+.fasilitas-item-reverse .fasilitas-image {
+    transform: translateX(-40px);
+}
+
+.fasilitas-item.animate-in .fasilitas-content,
 .fasilitas-item.animate-in .fasilitas-image {
-    animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-}
-
-.fasilitas-item-reverse.animate-in .fasilitas-content {
-    animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.fasilitas-item-reverse.animate-in .fasilitas-image {
-    animation: fadeInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-}
-
-@keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .fasilitas-item:last-child {
