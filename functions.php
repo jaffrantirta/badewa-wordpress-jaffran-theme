@@ -398,34 +398,42 @@ function badewatheme_customize_register($wp_customize)
     ]);
     $wp_customize->add_control('smk_kompetensi_count', [
         'label' => __('Number of Program Items', 'badewatheme'),
-        'description' => __('How many program items to display (1-6)', 'badewatheme'),
+        'description' => __('How many program items to display (1-10)', 'badewatheme'),
         'section' => 'badewatheme_kompetensi',
         'type' => 'number',
         'input_attrs' => [
             'min' => 1,
-            'max' => 6,
+            'max' => 10,
             'step' => 1,
         ],
     ]);
 
     $default_kompetensi_titles = [
-        1 => 'Asisten Keperawatan',
-        2 => 'Farmasi Klinis',
-        3 => 'Teknologi Laboratorium Medik',
-        4 => 'Rekam Medis dan Informasi Kesehatan',
-        5 => 'Dental Assisting',
-        6 => 'Caregiver',
+        1 => 'Software Engineering',
+        2 => 'Business Management',
+        3 => 'Digital Marketing',
+        4 => 'Graphic Design',
+        5 => 'Accounting & Finance',
+        6 => 'Hospitality & Tourism',
+        7 => 'Multimedia Production',
+        8 => 'Office Administration',
+        9 => 'Web Development',
+        10 => 'Data Analytics',
     ];
     $default_kompetensi_texts = [
-        1 => 'Memberikan perawatan dasar pasien, membantu dokter dan perawat dalam prosedur medis, serta memastikan kenyamanan dan keselamatan pasien.',
-        2 => 'Mengelola dan menyiapkan obat-obatan, memberikan konseling kepada pasien tentang penggunaan obat yang tepat dan aman.',
-        3 => 'Melakukan analisis laboratorium untuk mendukung diagnosis penyakit dan pemantauan kesehatan pasien.',
-        4 => 'Mengelola sistem informasi kesehatan, dokumentasi medis, dan administrasi rumah sakit secara profesional.',
-        5 => 'Membantu dokter gigi dalam perawatan dan prosedur dental, serta edukasi kesehatan gigi kepada pasien.',
-        6 => 'Memberikan perawatan holistik kepada lansia dan pasien yang membutuhkan perawatan jangka panjang.',
+        1 => 'Learn programming, application development, and software engineering principles to build modern digital solutions.',
+        2 => 'Master business planning, management strategies, and entrepreneurship skills for effective organizational leadership.',
+        3 => 'Develop expertise in online marketing, social media strategy, content creation, and digital campaign management.',
+        4 => 'Create visual communications, branding materials, and digital designs using industry-standard tools and techniques.',
+        5 => 'Gain proficiency in financial management, bookkeeping, taxation, and accounting practices for various industries.',
+        6 => 'Prepare for careers in hotel management, tourism services, event planning, and customer experience excellence.',
+        7 => 'Produce engaging multimedia content including video, audio, animation, and interactive media for various platforms.',
+        8 => 'Develop administrative skills, office management techniques, and business communication for professional environments.',
+        9 => 'Build responsive websites and web applications using modern frameworks, databases, and development practices.',
+        10 => 'Analyze data, create insights, and make data-driven decisions using statistical tools and visualization techniques.',
     ];
 
-    for ($i = 1; $i <= 6; $i++) {
+    for ($i = 1; $i <= 10; $i++) {
         $wp_customize->add_setting("smk_kompetensi_image_{$i}", [
             'default' => '',
             'sanitize_callback' => 'esc_url_raw',

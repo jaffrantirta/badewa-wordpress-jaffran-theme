@@ -72,31 +72,43 @@ get_header();
             <?php
             $kompetensi_count = absint(get_theme_mod('smk_kompetensi_count', 2));
             if ($kompetensi_count < 1) $kompetensi_count = 1;
-            if ($kompetensi_count > 6) $kompetensi_count = 6;
+            if ($kompetensi_count > 10) $kompetensi_count = 10;
 
             $default_images = [
-                1 => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
-                2 => 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1200&q=80',
-                3 => 'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1200&q=80',
-                4 => 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=1200&q=80',
-                5 => 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80',
-                6 => 'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=1200&q=80',
+                1 => 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80',
+                2 => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+                3 => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+                4 => 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1200&q=80',
+                5 => 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80',
+                6 => 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=80',
+                7 => 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1200&q=80',
+                8 => 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1200&q=80',
+                9 => 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
+                10 => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
             ];
             $default_titles = [
-                1 => 'Asisten Keperawatan',
-                2 => 'Farmasi Klinis',
-                3 => 'Teknologi Laboratorium Medik',
-                4 => 'Rekam Medis dan Informasi Kesehatan',
-                5 => 'Dental Assisting',
-                6 => 'Caregiver',
+                1 => 'Software Engineering',
+                2 => 'Business Management',
+                3 => 'Digital Marketing',
+                4 => 'Graphic Design',
+                5 => 'Accounting & Finance',
+                6 => 'Hospitality & Tourism',
+                7 => 'Multimedia Production',
+                8 => 'Office Administration',
+                9 => 'Web Development',
+                10 => 'Data Analytics',
             ];
             $default_texts = [
-                1 => 'Memberikan perawatan dasar pasien, membantu dokter dan perawat dalam prosedur medis, serta memastikan kenyamanan dan keselamatan pasien.',
-                2 => 'Mengelola dan menyiapkan obat-obatan, memberikan konseling kepada pasien tentang penggunaan obat yang tepat dan aman.',
-                3 => 'Melakukan analisis laboratorium untuk mendukung diagnosis penyakit dan pemantauan kesehatan pasien.',
-                4 => 'Mengelola sistem informasi kesehatan, dokumentasi medis, dan administrasi rumah sakit secara profesional.',
-                5 => 'Membantu dokter gigi dalam perawatan dan prosedur dental, serta edukasi kesehatan gigi kepada pasien.',
-                6 => 'Memberikan perawatan holistik kepada lansia dan pasien yang membutuhkan perawatan jangka panjang.',
+                1 => 'Learn programming, application development, and software engineering principles to build modern digital solutions.',
+                2 => 'Master business planning, management strategies, and entrepreneurship skills for effective organizational leadership.',
+                3 => 'Develop expertise in online marketing, social media strategy, content creation, and digital campaign management.',
+                4 => 'Create visual communications, branding materials, and digital designs using industry-standard tools and techniques.',
+                5 => 'Gain proficiency in financial management, bookkeeping, taxation, and accounting practices for various industries.',
+                6 => 'Prepare for careers in hotel management, tourism services, event planning, and customer experience excellence.',
+                7 => 'Produce engaging multimedia content including video, audio, animation, and interactive media for various platforms.',
+                8 => 'Develop administrative skills, office management techniques, and business communication for professional environments.',
+                9 => 'Build responsive websites and web applications using modern frameworks, databases, and development practices.',
+                10 => 'Analyze data, create insights, and make data-driven decisions using statistical tools and visualization techniques.',
             ];
             $kompetensi_items = [];
             for ($i = 1; $i <= $kompetensi_count; $i++) {
