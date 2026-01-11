@@ -63,6 +63,85 @@ add_action('wp_enqueue_scripts', 'smkkesehatan_assets');
 
 function smkkesehatan_customize_register($wp_customize)
 {
+    // Theme Colors Section
+    $wp_customize->add_section('smkkesehatan_colors', [
+        'title' => __('Theme Colors', 'smkkesehatan'),
+        'description' => __('Customize the color scheme of your website', 'smkkesehatan'),
+        'priority' => 28,
+    ]);
+
+    // Primary Color
+    $wp_customize->add_setting('smk_color_primary', [
+        'default' => '#007e41',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'smk_color_primary', [
+        'label' => __('Primary Color', 'smkkesehatan'),
+        'description' => __('Main brand color used for buttons, links, and highlights', 'smkkesehatan'),
+        'section' => 'smkkesehatan_colors',
+    ]));
+
+    // Primary Dark Color
+    $wp_customize->add_setting('smk_color_primary_dark', [
+        'default' => '#28a828',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'smk_color_primary_dark', [
+        'label' => __('Primary Dark Color', 'smkkesehatan'),
+        'description' => __('Darker shade of primary color for hover states', 'smkkesehatan'),
+        'section' => 'smkkesehatan_colors',
+    ]));
+
+    // Accent Color
+    $wp_customize->add_setting('smk_color_accent', [
+        'default' => '#4cd44c',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'smk_color_accent', [
+        'label' => __('Accent Color', 'smkkesehatan'),
+        'description' => __('Secondary accent color for highlights and badges', 'smkkesehatan'),
+        'section' => 'smkkesehatan_colors',
+    ]));
+
+    // Cream Color
+    $wp_customize->add_setting('smk_color_cream', [
+        'default' => '#f5f7fb',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'smk_color_cream', [
+        'label' => __('Cream/Background Color', 'smkkesehatan'),
+        'description' => __('Light background color for sections', 'smkkesehatan'),
+        'section' => 'smkkesehatan_colors',
+    ]));
+
+    // Ink Color
+    $wp_customize->add_setting('smk_color_ink', [
+        'default' => '#0b1b36',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'smk_color_ink', [
+        'label' => __('Ink/Text Color', 'smkkesehatan'),
+        'description' => __('Main text color for headings and body text', 'smkkesehatan'),
+        'section' => 'smkkesehatan_colors',
+    ]));
+
+    // Muted Color
+    $wp_customize->add_setting('smk_color_muted', [
+        'default' => '#5c6b86',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'smk_color_muted', [
+        'label' => __('Muted Text Color', 'smkkesehatan'),
+        'description' => __('Secondary text color for descriptions and meta information', 'smkkesehatan'),
+        'section' => 'smkkesehatan_colors',
+    ]));
+
     // Header Section
     $wp_customize->add_section('smkkesehatan_header', [
         'title' => __('Header Settings', 'smkkesehatan'),
@@ -943,6 +1022,31 @@ function smkkesehatan_customize_register($wp_customize)
 }
 
 add_action('customize_register', 'smkkesehatan_customize_register');
+
+// Output custom colors as CSS variables
+function smkkesehatan_custom_colors()
+{
+    $primary = get_theme_mod('smk_color_primary', '#007e41');
+    $primary_dark = get_theme_mod('smk_color_primary_dark', '#28a828');
+    $accent = get_theme_mod('smk_color_accent', '#4cd44c');
+    $cream = get_theme_mod('smk_color_cream', '#f5f7fb');
+    $ink = get_theme_mod('smk_color_ink', '#0b1b36');
+    $muted = get_theme_mod('smk_color_muted', '#5c6b86');
+
+    ?>
+    <style type="text/css">
+        :root {
+            --primary: <?php echo esc_attr($primary); ?>;
+            --primary-dark: <?php echo esc_attr($primary_dark); ?>;
+            --accent: <?php echo esc_attr($accent); ?>;
+            --cream: <?php echo esc_attr($cream); ?>;
+            --ink: <?php echo esc_attr($ink); ?>;
+            --muted: <?php echo esc_attr($muted); ?>;
+        }
+    </style>
+    <?php
+}
+add_action('wp_head', 'smkkesehatan_custom_colors');
 
 function smkkesehatan_nav_menu_css_class($classes, $item, $args, $depth)
 {

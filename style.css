@@ -6,6 +6,8 @@ Description: Custom theme for SMK Kesehatan
 Version: 1.1.0
 */
 
+/* CSS Variables are now defined dynamically in functions.php via WordPress Customizer */
+/* Default fallback values */
 :root {
     --primary: #007e41;
     --primary-dark: #28a828;
