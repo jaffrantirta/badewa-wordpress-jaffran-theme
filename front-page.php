@@ -145,41 +145,69 @@ get_header();
                 <p><?php echo esc_html(get_theme_mod('smk_keunggulan_intro', 'Lingkungan belajar yang formal, profesional, dan adaptif dengan kebutuhan dunia kesehatan.')); ?></p>
             </div>
             <?php
+            $keunggulan_count = absint(get_theme_mod('smk_keunggulan_count', 4));
+            if ($keunggulan_count < 1) $keunggulan_count = 1;
+            if ($keunggulan_count > 8) $keunggulan_count = 8;
+
             $default_keunggulan_images = [
                 1 => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
                 2 => 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
                 3 => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
                 4 => 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
+                5 => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80',
+                6 => 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
+                7 => 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=600&q=80',
+                8 => 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=80',
             ];
             $default_keunggulan_titles = [
                 1 => 'Kurikulum Industri',
                 2 => 'Fasilitas Modern',
                 3 => 'Pengajar Profesional',
                 4 => 'Jalur Karier',
+                5 => 'Program Magang',
+                6 => 'Sertifikasi Kompetensi',
+                7 => 'Dukungan Karir',
+                8 => 'Komunitas Alumni',
             ];
             $default_keunggulan_texts = [
                 1 => 'Materi dirancang bersama mitra kesehatan untuk membekali kompetensi nyata.',
                 2 => 'Laboratorium praktik dan ruang simulasi yang mendukung pembelajaran aktif.',
                 3 => 'Tenaga pendidik berpengalaman di bidang kesehatan dan pendidikan vokasi.',
                 4 => 'Program pendampingan alumni dan kerja sama industri untuk penempatan kerja.',
+                5 => 'Pengalaman kerja langsung di institusi kesehatan mitra untuk praktik nyata.',
+                6 => 'Pelatihan dan ujian sertifikasi profesi sesuai standar industri kesehatan.',
+                7 => 'Bimbingan karir dan job placement untuk mempersiapkan lulusan memasuki dunia kerja.',
+                8 => 'Jaringan alumni aktif yang saling mendukung dalam pengembangan karir.',
             ];
+
+            // Determine column class based on count
+            $col_class = 'col-md-6 col-lg-3'; // Default for 4 items
+            if ($keunggulan_count <= 2) {
+                $col_class = 'col-md-6';
+            } elseif ($keunggulan_count == 3) {
+                $col_class = 'col-md-6 col-lg-4';
+            } elseif ($keunggulan_count >= 5 && $keunggulan_count <= 6) {
+                $col_class = 'col-md-6 col-lg-4';
+            } elseif ($keunggulan_count >= 7) {
+                $col_class = 'col-md-6 col-lg-3';
+            }
             ?>
             <div class="row g-4">
-                <?php for ($i = 1; $i <= 4; $i++): ?>
-                    <div class="col-md-6 col-lg-3">
+                <?php for ($i = 1; $i <= $keunggulan_count; $i++): ?>
+                    <div class="<?php echo esc_attr($col_class); ?>">
                         <div class="feature-card h-100">
                             <?php
-                            $keunggulan_image = get_theme_mod("smk_keunggulan_image_{$i}", $default_keunggulan_images[$i]);
+                            $keunggulan_image = get_theme_mod("smk_keunggulan_image_{$i}", isset($default_keunggulan_images[$i]) ? $default_keunggulan_images[$i] : '');
                             ?>
                             <?php if ($keunggulan_image): ?>
                                 <div class="feature-image">
-                                    <img src="<?php echo esc_url($keunggulan_image); ?>" alt="<?php echo esc_attr(get_theme_mod("smk_keunggulan_title_{$i}", $default_keunggulan_titles[$i])); ?>" loading="lazy">
+                                    <img src="<?php echo esc_url($keunggulan_image); ?>" alt="<?php echo esc_attr(get_theme_mod("smk_keunggulan_title_{$i}", isset($default_keunggulan_titles[$i]) ? $default_keunggulan_titles[$i] : '')); ?>" loading="lazy">
                                 </div>
                             <?php endif; ?>
                             <div class="feature-content">
                                 <span class="feature-number"><?php echo esc_html(sprintf('%02d', $i)); ?></span>
-                                <h3><?php echo esc_html(get_theme_mod("smk_keunggulan_title_{$i}", $default_keunggulan_titles[$i])); ?></h3>
-                                <p><?php echo esc_html(get_theme_mod("smk_keunggulan_text_{$i}", $default_keunggulan_texts[$i])); ?></p>
+                                <h3><?php echo esc_html(get_theme_mod("smk_keunggulan_title_{$i}", isset($default_keunggulan_titles[$i]) ? $default_keunggulan_titles[$i] : '')); ?></h3>
+                                <p><?php echo esc_html(get_theme_mod("smk_keunggulan_text_{$i}", isset($default_keunggulan_texts[$i]) ? $default_keunggulan_texts[$i] : '')); ?></p>
                             </div>
                         </div>
                     </div>

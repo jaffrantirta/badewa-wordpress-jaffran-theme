@@ -449,20 +449,46 @@ function badewatheme_customize_register($wp_customize)
         'type' => 'textarea',
     ]);
 
+    // Number of Keunggulan items
+    $wp_customize->add_setting('smk_keunggulan_count', [
+        'default' => 4,
+        'sanitize_callback' => 'absint',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control('smk_keunggulan_count', [
+        'label' => __('Number of Keunggulan Items', 'badewatheme'),
+        'description' => __('How many keunggulan items to display (1-8)', 'badewatheme'),
+        'section' => 'badewatheme_keunggulan',
+        'type' => 'number',
+        'input_attrs' => [
+            'min' => 1,
+            'max' => 8,
+            'step' => 1,
+        ],
+    ]);
+
     $default_keunggulan_titles = [
         1 => 'Kurikulum Industri',
         2 => 'Fasilitas Modern',
         3 => 'Pengajar Profesional',
         4 => 'Jalur Karier',
+        5 => 'Program Magang',
+        6 => 'Sertifikasi Kompetensi',
+        7 => 'Dukungan Karir',
+        8 => 'Komunitas Alumni',
     ];
     $default_keunggulan_texts = [
         1 => 'Materi dirancang bersama mitra kesehatan untuk membekali kompetensi nyata.',
         2 => 'Laboratorium praktik dan ruang simulasi yang mendukung pembelajaran aktif.',
         3 => 'Tenaga pendidik berpengalaman di bidang kesehatan dan pendidikan vokasi.',
         4 => 'Program pendampingan alumni dan kerja sama industri untuk penempatan kerja.',
+        5 => 'Pengalaman kerja langsung di institusi kesehatan mitra untuk praktik nyata.',
+        6 => 'Pelatihan dan ujian sertifikasi profesi sesuai standar industri kesehatan.',
+        7 => 'Bimbingan karir dan job placement untuk mempersiapkan lulusan memasuki dunia kerja.',
+        8 => 'Jaringan alumni aktif yang saling mendukung dalam pengembangan karir.',
     ];
 
-    for ($i = 1; $i <= 4; $i++) {
+    for ($i = 1; $i <= 8; $i++) {
         $wp_customize->add_setting("smk_keunggulan_image_{$i}", [
             'default' => '',
             'sanitize_callback' => 'esc_url_raw',
