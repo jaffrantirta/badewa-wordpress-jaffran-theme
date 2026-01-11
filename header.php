@@ -54,8 +54,8 @@
                 </div>
                 <div class="top-bar-right">
                     <?php
-                    $phone = get_theme_mod('smk_header_phone', '+6282227535136');
-                    $email = get_theme_mod('smk_header_email', 'info@merdeka-tc.id');
+                    $phone = get_theme_mod('smk_header_phone', '+6281234567890');
+                    $email = get_theme_mod('smk_header_email', 'info@email.com');
                     ?>
                     <?php if ($phone): ?>
                         <a href="tel:<?php echo esc_attr(str_replace([' ', '-', '(', ')'], '', $phone)); ?>" class="contact-link">
@@ -82,7 +82,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>">
-                <?php if (has_custom_logo()) : ?>
+                <?php if (has_custom_logo()): ?>
                     <span class="navbar-logo"><?php echo get_custom_logo(); ?></span>
                 <?php endif; ?>
                 <span class="navbar-title"><?php bloginfo('name'); ?></span>

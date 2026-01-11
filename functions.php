@@ -155,7 +155,7 @@ function badewatheme_customize_register($wp_customize)
     ]);
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'smk_blog_default_image', [
         'label' => __('Default Blog Image', 'badewatheme'),
-        'description' => __('This image will be used for blog posts that don\'t have a featured image', 'badewatheme'),
+        'description' => __("This image will be used for blog posts that don't have a featured image", 'badewatheme'),
         'section' => 'badewatheme_blog',
         'settings' => 'smk_blog_default_image',
     ]));
@@ -167,7 +167,7 @@ function badewatheme_customize_register($wp_customize)
     ]);
 
     $wp_customize->add_setting('smk_header_phone', [
-        'default' => '+6282227535136',
+        'default' => '+6281234567890',
         'sanitize_callback' => 'sanitize_text_field',
     ]);
     $wp_customize->add_control('smk_header_phone', [
@@ -177,7 +177,7 @@ function badewatheme_customize_register($wp_customize)
     ]);
 
     $wp_customize->add_setting('smk_header_email', [
-        'default' => 'info@merdeka-tc.id',
+        'default' => 'info@email.com',
         'sanitize_callback' => 'sanitize_email',
     ]);
     $wp_customize->add_control('smk_header_email', [
@@ -905,7 +905,7 @@ function badewatheme_customize_register($wp_customize)
     ]);
 
     $wp_customize->add_setting('smk_contact_whatsapp', [
-        'default' => '+6282227535136',
+        'default' => '+6281234567890',
         'sanitize_callback' => 'sanitize_text_field',
     ]);
     $wp_customize->add_control('smk_contact_whatsapp', [
@@ -1064,6 +1064,7 @@ function badewatheme_custom_colors()
     </style>
     <?php
 }
+
 add_action('wp_head', 'badewatheme_custom_colors');
 
 function badewatheme_nav_menu_css_class($classes, $item, $args, $depth)
