@@ -881,6 +881,127 @@ function badewatheme_customize_register($wp_customize)
         'type' => 'textarea',
     ]);
 
+    // Our Team Section
+    $wp_customize->add_section('badewatheme_team', [
+        'title' => __('Our Team', 'badewatheme'),
+        'description' => __('Customize Our Team section on About page', 'badewatheme'),
+        'priority' => 41,
+    ]);
+
+    $wp_customize->add_setting('smk_team_title', [
+        'default' => 'Our Team',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('smk_team_title', [
+        'label' => __('Section Title', 'badewatheme'),
+        'section' => 'badewatheme_team',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('smk_team_description', [
+        'default' => 'Meet our dedicated team of professionals committed to providing quality education.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ]);
+    $wp_customize->add_control('smk_team_description', [
+        'label' => __('Section Description', 'badewatheme'),
+        'section' => 'badewatheme_team',
+        'type' => 'textarea',
+    ]);
+
+    // Number of Team Members
+    $wp_customize->add_setting('smk_team_count', [
+        'default' => 4,
+        'sanitize_callback' => 'absint',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control('smk_team_count', [
+        'label' => __('Number of Team Members', 'badewatheme'),
+        'description' => __('How many team members to display (1-8)', 'badewatheme'),
+        'section' => 'badewatheme_team',
+        'type' => 'number',
+        'input_attrs' => [
+            'min' => 1,
+            'max' => 8,
+            'step' => 1,
+        ],
+    ]);
+
+    $default_team_names = [
+        1 => 'John Doe',
+        2 => 'Jane Smith',
+        3 => 'Robert Johnson',
+        4 => 'Maria Garcia',
+        5 => 'David Lee',
+        6 => 'Sarah Williams',
+        7 => 'Michael Brown',
+        8 => 'Emily Davis',
+    ];
+    $default_team_titles = [
+        1 => 'Principal',
+        2 => 'Vice Principal',
+        3 => 'Head of Academic',
+        4 => 'Student Affairs Director',
+        5 => 'Career Development Manager',
+        6 => 'Quality Assurance Coordinator',
+        7 => 'Facilities Manager',
+        8 => 'Alumni Relations Officer',
+    ];
+    $default_team_descriptions = [
+        1 => 'Leading the school with vision and dedication to educational excellence.',
+        2 => 'Supporting academic programs and student development initiatives.',
+        3 => 'Overseeing curriculum development and teaching quality standards.',
+        4 => 'Managing student welfare, activities, and counseling services.',
+        5 => 'Facilitating career guidance, internships, and job placement programs.',
+        6 => 'Ensuring institutional quality and continuous improvement processes.',
+        7 => 'Maintaining campus facilities and learning environment infrastructure.',
+        8 => 'Building and nurturing alumni network and engagement programs.',
+    ];
+
+    for ($i = 1; $i <= 8; $i++) {
+        $wp_customize->add_setting("smk_team_image_{$i}", [
+            'default' => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ]);
+        $wp_customize->add_control(new WP_Customize_Image_Control(
+            $wp_customize,
+            "smk_team_image_{$i}",
+            [
+                'label' => sprintf(__('Team Member %d - Image', 'badewatheme'), $i),
+                'section' => 'badewatheme_team',
+            ]
+        ));
+
+        $wp_customize->add_setting("smk_team_name_{$i}", [
+            'default' => $default_team_names[$i],
+            'sanitize_callback' => 'sanitize_text_field',
+        ]);
+        $wp_customize->add_control("smk_team_name_{$i}", [
+            'label' => sprintf(__('Team Member %d - Name', 'badewatheme'), $i),
+            'section' => 'badewatheme_team',
+            'type' => 'text',
+        ]);
+
+        $wp_customize->add_setting("smk_team_title_{$i}", [
+            'default' => $default_team_titles[$i],
+            'sanitize_callback' => 'sanitize_text_field',
+        ]);
+        $wp_customize->add_control("smk_team_title_{$i}", [
+            'label' => sprintf(__('Team Member %d - Title/Position', 'badewatheme'), $i),
+            'section' => 'badewatheme_team',
+            'type' => 'text',
+        ]);
+
+        $wp_customize->add_setting("smk_team_description_{$i}", [
+            'default' => $default_team_descriptions[$i],
+            'sanitize_callback' => 'sanitize_textarea_field',
+        ]);
+        $wp_customize->add_control("smk_team_description_{$i}", [
+            'label' => sprintf(__('Team Member %d - Description', 'badewatheme'), $i),
+            'section' => 'badewatheme_team',
+            'type' => 'textarea',
+        ]);
+    }
+
     // Fasilitas Page Section
     $wp_customize->add_section('badewatheme_fasilitas', [
         'title' => __('Fasilitas Page', 'badewatheme'),

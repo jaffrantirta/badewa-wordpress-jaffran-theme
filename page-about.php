@@ -109,6 +109,59 @@ $mission_items = get_theme_mod('smk_mission_items', "Menyelenggarakan pendidikan
     </div>
 </section>
 
+<!-- Our Team Section -->
+<?php
+$team_title = get_theme_mod('smk_team_title', 'Our Team');
+$team_description = get_theme_mod('smk_team_description', 'Meet our dedicated team of professionals committed to providing quality education.');
+$team_count = absint(get_theme_mod('smk_team_count', 4));
+if ($team_count < 1) $team_count = 1;
+if ($team_count > 8) $team_count = 8;
+
+// Determine column class based on count
+$col_class = 'col-md-6 col-lg-3'; // Default for 4 items
+if ($team_count <= 2) {
+    $col_class = 'col-md-6';
+} elseif ($team_count == 3) {
+    $col_class = 'col-md-6 col-lg-4';
+} elseif ($team_count >= 5 && $team_count <= 6) {
+    $col_class = 'col-md-6 col-lg-4';
+} elseif ($team_count >= 7) {
+    $col_class = 'col-md-6 col-lg-3';
+}
+?>
+<section class="team-section section-pad">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title"><?php echo esc_html($team_title); ?></h2>
+            <p class="section-description"><?php echo esc_html($team_description); ?></p>
+        </div>
+
+        <div class="row g-4">
+            <?php for ($i = 1; $i <= $team_count; $i++):
+                $team_image = get_theme_mod("smk_team_image_{$i}", '');
+                $team_name = get_theme_mod("smk_team_name_{$i}", "Team Member {$i}");
+                $team_title_text = get_theme_mod("smk_team_title_{$i}", 'Position');
+                $team_desc = get_theme_mod("smk_team_description_{$i}", 'Description of team member role and responsibilities.');
+            ?>
+                <div class="<?php echo esc_attr($col_class); ?>">
+                    <div class="team-card">
+                        <?php if ($team_image): ?>
+                            <div class="team-card-image">
+                                <img src="<?php echo esc_url($team_image); ?>" alt="<?php echo esc_attr($team_name); ?>">
+                            </div>
+                        <?php endif; ?>
+                        <div class="team-card-body">
+                            <h3 class="team-card-name"><?php echo esc_html($team_name); ?></h3>
+                            <p class="team-card-title"><?php echo esc_html($team_title_text); ?></p>
+                            <p class="team-card-description"><?php echo esc_html($team_desc); ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php endfor; ?>
+        </div>
+    </div>
+</section>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Intersection Observer for scroll animations
@@ -130,10 +183,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const aboutContent = document.querySelector('.about-content');
     const aboutImage = document.querySelector('.about-image');
     const vmCards = document.querySelectorAll('.vm-card');
+    const teamCards = document.querySelectorAll('.team-card');
+    const sectionHeader = document.querySelector('.team-section .section-header');
 
     if (aboutContent) observer.observe(aboutContent);
     if (aboutImage) observer.observe(aboutImage);
     vmCards.forEach(card => observer.observe(card));
+    teamCards.forEach(card => observer.observe(card));
+    if (sectionHeader) observer.observe(sectionHeader);
 });
 </script>
 
