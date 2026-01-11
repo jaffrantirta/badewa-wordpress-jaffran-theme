@@ -807,12 +807,13 @@ function smkkesehatan_customize_register($wp_customize)
         'type' => 'textarea',
     ]);
 
-    $wp_customize->add_setting('smk_contact_phone', [
+    $wp_customize->add_setting('smk_contact_whatsapp', [
         'default' => '+6282227535136',
         'sanitize_callback' => 'sanitize_text_field',
     ]);
-    $wp_customize->add_control('smk_contact_phone', [
-        'label' => __('Phone Number', 'smkkesehatan'),
+    $wp_customize->add_control('smk_contact_whatsapp', [
+        'label' => __('WhatsApp Number', 'smkkesehatan'),
+        'description' => __('Format: +62XXXXXXXXXX', 'smkkesehatan'),
         'section' => 'smkkesehatan_contact',
         'type' => 'text',
     ]);
