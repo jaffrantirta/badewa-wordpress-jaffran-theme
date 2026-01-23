@@ -1433,3 +1433,256 @@ function badewatheme_nav_menu_submenu_css_class($classes, $args, $depth)
 }
 
 add_filter('nav_menu_submenu_css_class', 'badewatheme_nav_menu_submenu_css_class', 10, 3);
+
+// Register Program Custom Post Type
+function badewatheme_register_program_cpt() {
+    $labels = [
+        'name'               => __('Programs', 'badewatheme'),
+        'singular_name'      => __('Program', 'badewatheme'),
+        'menu_name'          => __('Programs', 'badewatheme'),
+        'add_new'            => __('Add New', 'badewatheme'),
+        'add_new_item'       => __('Add New Program', 'badewatheme'),
+        'edit_item'          => __('Edit Program', 'badewatheme'),
+        'new_item'           => __('New Program', 'badewatheme'),
+        'view_item'          => __('View Program', 'badewatheme'),
+        'search_items'       => __('Search Programs', 'badewatheme'),
+        'not_found'          => __('No programs found', 'badewatheme'),
+        'not_found_in_trash' => __('No programs found in Trash', 'badewatheme'),
+    ];
+
+    $args = [
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => ['slug' => 'program'],
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => 5,
+        'menu_icon'          => 'dashicons-welcome-learn-more',
+        'supports'           => ['title', 'editor', 'thumbnail'],
+    ];
+
+    register_post_type('program', $args);
+}
+add_action('init', 'badewatheme_register_program_cpt');
+
+// Add Meta Boxes for Program
+function badewatheme_program_meta_boxes() {
+    add_meta_box(
+        'program_hero_settings',
+        __('Hero Section Settings', 'badewatheme'),
+        'badewatheme_program_hero_callback',
+        'program',
+        'normal',
+        'high'
+    );
+
+    add_meta_box(
+        'program_sections_settings',
+        __('Content Sections (Alternating Layout)', 'badewatheme'),
+        'badewatheme_program_sections_callback',
+        'program',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'badewatheme_program_meta_boxes');
+
+// Hero Section Meta Box Callback
+function badewatheme_program_hero_callback($post) {
+    wp_nonce_field('badewatheme_program_meta', 'badewatheme_program_nonce');
+
+    $hero_image = get_post_meta($post->ID, '_program_hero_image', true);
+    $hero_title = get_post_meta($post->ID, '_program_hero_title', true);
+    $hero_text = get_post_meta($post->ID, '_program_hero_text', true);
+    ?>
+    <table class="form-table">
+        <tr>
+            <th><label for="program_hero_image"><?php _e('Hero Image URL', 'badewatheme'); ?></label></th>
+            <td>
+                <input type="text" id="program_hero_image" name="program_hero_image" value="<?php echo esc_attr($hero_image); ?>" class="large-text">
+                <p class="description"><?php _e('Enter the URL of the hero background image or use Media Library.', 'badewatheme'); ?></p>
+                <button type="button" class="button program-upload-image" data-target="program_hero_image"><?php _e('Upload Image', 'badewatheme'); ?></button>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="program_hero_title"><?php _e('Hero Title', 'badewatheme'); ?></label></th>
+            <td>
+                <input type="text" id="program_hero_title" name="program_hero_title" value="<?php echo esc_attr($hero_title); ?>" class="large-text">
+                <p class="description"><?php _e('Leave empty to use the post title.', 'badewatheme'); ?></p>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="program_hero_text"><?php _e('Hero Subtitle/Text', 'badewatheme'); ?></label></th>
+            <td>
+                <textarea id="program_hero_text" name="program_hero_text" rows="3" class="large-text"><?php echo esc_textarea($hero_text); ?></textarea>
+            </td>
+        </tr>
+    </table>
+    <?php
+}
+
+// Sections Meta Box Callback
+function badewatheme_program_sections_callback($post) {
+    $section_count = get_post_meta($post->ID, '_program_section_count', true);
+    $section_count = $section_count ? intval($section_count) : 3;
+    ?>
+    <p>
+        <label for="program_section_count"><strong><?php _e('Number of Sections:', 'badewatheme'); ?></strong></label>
+        <select id="program_section_count" name="program_section_count">
+            <?php for ($i = 1; $i <= 10; $i++): ?>
+                <option value="<?php echo $i; ?>" <?php selected($section_count, $i); ?>><?php echo $i; ?></option>
+            <?php endfor; ?>
+        </select>
+        <span class="description"><?php _e('Select how many content sections to display (max 10).', 'badewatheme'); ?></span>
+    </p>
+    <p class="description" style="margin-bottom: 20px;">
+        <?php _e('Sections will automatically alternate: Section 1 = Text Left / Image Right, Section 2 = Image Left / Text Right, and so on.', 'badewatheme'); ?>
+    </p>
+    <hr>
+
+    <div id="program-sections-container">
+        <?php for ($i = 1; $i <= 10; $i++):
+            $section_image = get_post_meta($post->ID, "_program_section_image_{$i}", true);
+            $section_title = get_post_meta($post->ID, "_program_section_title_{$i}", true);
+            $section_text = get_post_meta($post->ID, "_program_section_text_{$i}", true);
+            $display = $i <= $section_count ? '' : 'display: none;';
+        ?>
+            <div class="program-section-item" data-section="<?php echo $i; ?>" style="<?php echo $display; ?> margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-left: 4px solid #007e41;">
+                <h3 style="margin-top: 0;">
+                    <?php printf(__('Section %d', 'badewatheme'), $i); ?>
+                    <span style="font-weight: normal; font-size: 13px; color: #666;">
+                        (<?php echo $i % 2 === 1 ? __('Text Left / Image Right', 'badewatheme') : __('Image Left / Text Right', 'badewatheme'); ?>)
+                    </span>
+                </h3>
+                <table class="form-table" style="margin: 0;">
+                    <tr>
+                        <th style="width: 150px;"><label><?php _e('Section Image URL', 'badewatheme'); ?></label></th>
+                        <td>
+                            <input type="text" name="program_section_image_<?php echo $i; ?>" value="<?php echo esc_attr($section_image); ?>" class="large-text">
+                            <button type="button" class="button program-upload-image" data-target="program_section_image_<?php echo $i; ?>"><?php _e('Upload Image', 'badewatheme'); ?></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label><?php _e('Section Title', 'badewatheme'); ?></label></th>
+                        <td>
+                            <input type="text" name="program_section_title_<?php echo $i; ?>" value="<?php echo esc_attr($section_title); ?>" class="large-text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label><?php _e('Section Content', 'badewatheme'); ?></label></th>
+                        <td>
+                            <textarea name="program_section_text_<?php echo $i; ?>" rows="5" class="large-text"><?php echo esc_textarea($section_text); ?></textarea>
+                            <p class="description"><?php _e('HTML is allowed.', 'badewatheme'); ?></p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <?php endfor; ?>
+    </div>
+
+    <script>
+    jQuery(document).ready(function($) {
+        // Toggle section visibility based on count
+        $('#program_section_count').on('change', function() {
+            var count = parseInt($(this).val());
+            $('.program-section-item').each(function() {
+                var sectionNum = parseInt($(this).data('section'));
+                if (sectionNum <= count) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        // Media uploader for images
+        $('.program-upload-image').on('click', function(e) {
+            e.preventDefault();
+            var button = $(this);
+            var targetInput = $('input[name="' + button.data('target') + '"]');
+            if (!targetInput.length) {
+                targetInput = $('#' + button.data('target'));
+            }
+
+            var frame = wp.media({
+                title: '<?php _e('Select or Upload Image', 'badewatheme'); ?>',
+                button: { text: '<?php _e('Use this image', 'badewatheme'); ?>' },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                var attachment = frame.state().get('selection').first().toJSON();
+                targetInput.val(attachment.url);
+            });
+
+            frame.open();
+        });
+    });
+    </script>
+    <?php
+}
+
+// Save Program Meta
+function badewatheme_save_program_meta($post_id) {
+    // Verify nonce
+    if (!isset($_POST['badewatheme_program_nonce']) || !wp_verify_nonce($_POST['badewatheme_program_nonce'], 'badewatheme_program_meta')) {
+        return;
+    }
+
+    // Check autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // Check permissions
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // Save hero settings
+    if (isset($_POST['program_hero_image'])) {
+        update_post_meta($post_id, '_program_hero_image', esc_url_raw($_POST['program_hero_image']));
+    }
+    if (isset($_POST['program_hero_title'])) {
+        update_post_meta($post_id, '_program_hero_title', sanitize_text_field($_POST['program_hero_title']));
+    }
+    if (isset($_POST['program_hero_text'])) {
+        update_post_meta($post_id, '_program_hero_text', sanitize_textarea_field($_POST['program_hero_text']));
+    }
+
+    // Save section count
+    if (isset($_POST['program_section_count'])) {
+        $section_count = absint($_POST['program_section_count']);
+        if ($section_count < 1) $section_count = 1;
+        if ($section_count > 10) $section_count = 10;
+        update_post_meta($post_id, '_program_section_count', $section_count);
+    }
+
+    // Save section content
+    for ($i = 1; $i <= 10; $i++) {
+        if (isset($_POST["program_section_image_{$i}"])) {
+            update_post_meta($post_id, "_program_section_image_{$i}", esc_url_raw($_POST["program_section_image_{$i}"]));
+        }
+        if (isset($_POST["program_section_title_{$i}"])) {
+            update_post_meta($post_id, "_program_section_title_{$i}", sanitize_text_field($_POST["program_section_title_{$i}"]));
+        }
+        if (isset($_POST["program_section_text_{$i}"])) {
+            update_post_meta($post_id, "_program_section_text_{$i}", wp_kses_post($_POST["program_section_text_{$i}"]));
+        }
+    }
+}
+add_action('save_post_program', 'badewatheme_save_program_meta');
+
+// Enqueue media uploader for program edit page
+function badewatheme_program_admin_scripts($hook) {
+    global $post_type;
+    if (($hook === 'post-new.php' || $hook === 'post.php') && $post_type === 'program') {
+        wp_enqueue_media();
+    }
+}
+add_action('admin_enqueue_scripts', 'badewatheme_program_admin_scripts');

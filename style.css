@@ -3353,3 +3353,277 @@ ul.page-numbers .next {
         border-radius: 6px;
     }
 }
+
+/* ============================================
+   PROGRAM PAGE STYLES
+   ============================================ */
+
+/* Program Hero Section */
+.program-hero-section {
+    position: relative;
+    width: 100%;
+}
+
+.program-hero-container {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.program-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.program-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+    z-index: 1;
+}
+
+.program-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.program-hero-text-wrapper {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.program-hero-title {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.program-hero-text {
+    color: #ffffff;
+    font-size: 1.35rem;
+    opacity: 0.95;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Program Content Section */
+.program-content-section {
+    background-color: #ffffff;
+}
+
+.program-item {
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.program-item:last-child {
+    margin-bottom: 0;
+}
+
+.program-item.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.program-content {
+    padding: 1rem 0;
+}
+
+.program-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.program-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.program-item-reverse .program-title::after {
+    left: auto;
+    right: 0;
+}
+
+.program-item-reverse .program-content {
+    text-align: right;
+}
+
+.program-text {
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.program-text p {
+    margin-bottom: 1rem;
+}
+
+.program-text p:last-child {
+    margin-bottom: 0;
+}
+
+.program-image {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.program-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.program-image:hover img {
+    transform: scale(1.03);
+}
+
+/* Additional Post Content */
+.program-additional-content {
+    background-color: #f8f9fa;
+}
+
+.program-post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--ink);
+}
+
+.program-post-content h2,
+.program-post-content h3,
+.program-post-content h4 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--ink);
+}
+
+.program-post-content p {
+    margin-bottom: 1.5rem;
+}
+
+.program-post-content ul,
+.program-post-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.program-post-content li {
+    margin-bottom: 0.5rem;
+}
+
+.program-post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+/* Responsive styles for Program */
+@media (max-width: 991px) {
+    .program-hero-container {
+        height: 350px;
+    }
+
+    .program-hero-title {
+        font-size: 2.5rem;
+    }
+
+    .program-hero-text {
+        font-size: 1.2rem;
+    }
+
+    .program-item {
+        margin-bottom: 4rem;
+    }
+
+    .program-title {
+        font-size: 1.75rem;
+    }
+
+    .program-item-reverse .program-content {
+        text-align: left;
+    }
+
+    .program-item-reverse .program-title::after {
+        left: 0;
+        right: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .program-hero-container {
+        height: 300px;
+    }
+
+    .program-hero-title {
+        font-size: 2rem;
+    }
+
+    .program-hero-text {
+        font-size: 1.1rem;
+    }
+
+    .program-item {
+        margin-bottom: 3rem;
+    }
+
+    .program-title {
+        font-size: 1.5rem;
+    }
+
+    .program-text {
+        font-size: 1rem;
+    }
+
+    .program-image {
+        border-radius: 12px;
+        margin-top: 1.5rem;
+    }
+
+    .program-content {
+        padding: 0;
+    }
+}
+
+@media (max-width: 575px) {
+    .program-hero-container {
+        height: 250px;
+    }
+
+    .program-hero-title {
+        font-size: 1.75rem;
+    }
+
+    .program-hero-text {
+        font-size: 1rem;
+    }
+}
